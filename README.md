@@ -3,19 +3,19 @@ EasyUIImagePickerController for Swift
 
 
 1.声明
-var imagePickerController:JHImagePickerController?
+‘var imagePickerController:JHImagePickerController?’
 
 2.初始化
-//初始化方法一
-//        imagePickerController = JHImagePickerController()
-//初始化方法一的补充设置(若需要缓存时才设置)
-//设置是否缓存(默认为false)
-//        imagePickerController?.isCaches = true
-//设置缓存id（当需要缓存时才设置）
-//        imagePickerController?.identifier = "xx"
+    //初始化方法一
+    //        imagePickerController = JHImagePickerController()
+    //初始化方法一的补充设置(若需要缓存时才设置)
+    //设置是否缓存(默认为false)
+    //        imagePickerController?.isCaches = true
+    //设置缓存id（当需要缓存时才设置）
+    //        imagePickerController?.identifier = "xx"
 
-//初始化方法二
-imagePickerController = JHImagePickerController(isCaches: true, identifier: "abc")
+    //初始化方法二
+    imagePickerController = JHImagePickerController(isCaches: true, identifier: "abc")
 
 3.设置代理 JHImagePickerControllerDelegate
 imagePickerController?.delegate = self
