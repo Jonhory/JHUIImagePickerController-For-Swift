@@ -13,7 +13,6 @@
 		8908C6981D0D84430004B2E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8908C6971D0D84430004B2E4 /* Assets.xcassets */; };
 		8908C69B1D0D84430004B2E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8908C6991D0D84430004B2E4 /* LaunchScreen.storyboard */; };
 		8908C6A31D0D846C0004B2E4 /* JHImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908C6A21D0D846C0004B2E4 /* JHImagePickerController.swift */; };
-		89A7D3DB1D0DA4770009C998 /* jhSurprise.jpg in Resources */ = {isa = PBXBuildFile; fileRef = 89A7D3DA1D0DA4770009C998 /* jhSurprise.jpg */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -25,7 +24,6 @@
 		8908C69A1D0D84430004B2E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8908C69C1D0D84430004B2E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		8908C6A21D0D846C0004B2E4 /* JHImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePickerController.swift; sourceTree = "<group>"; };
-		89A7D3DA1D0DA4770009C998 /* jhSurprise.jpg */ = {isa = PBXFileReference; lastKnownFileType = image.jpeg; path = jhSurprise.jpg; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -42,7 +40,6 @@
 		8908C6841D0D84430004B2E4 = {
 			isa = PBXGroup;
 			children = (
-				89A7D3DA1D0DA4770009C998 /* jhSurprise.jpg */,
 				8908C6A21D0D846C0004B2E4 /* JHImagePickerController.swift */,
 				8908C68F1D0D84430004B2E4 /* EaseImagePickerController */,
 				8908C68E1D0D84430004B2E4 /* Products */,
@@ -127,7 +124,6 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				89A7D3DB1D0DA4770009C998 /* jhSurprise.jpg in Resources */,
 				8908C69B1D0D84430004B2E4 /* LaunchScreen.storyboard in Resources */,
 				8908C6981D0D84430004B2E4 /* Assets.xcassets in Resources */,
 				8908C6961D0D84430004B2E4 /* Main.storyboard in Resources */,

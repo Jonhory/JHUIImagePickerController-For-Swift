@@ -88,12 +88,7 @@ class ViewController: UIViewController,JHImagePickerControllerDelegate {
     //根据identifier读取缓存图片
     func readImageClicked() {
         let image = self.imagePickerController?.readImageFromCaches("abc")
-        if image?.accessibilityIdentifier != "jhSurprise.jpg" {
-            imageView.image = image
-        }else {
-            print("读取缓存照片失败,请检查图片identifier是否存在")
-            imageView.image = image
-        }
+        imageView.image = image
     }
     
     func deleteImageClicked(){
@@ -101,6 +96,7 @@ class ViewController: UIViewController,JHImagePickerControllerDelegate {
 //        self.imagePickerController?.removeCachesPictureForIdentifier("abc")
         //删除全部缓存图片
         if self.imagePickerController?.removeCachesPictures() == true {
+            imageView.image = nil
             print("删除全部缓存图片成功")
         }
     }
@@ -108,9 +104,7 @@ class ViewController: UIViewController,JHImagePickerControllerDelegate {
     //MARK:JHImagePickerControllerDelegate
     //当设置了缓存，且输入缓存identifier时返回该方法
     func selectImageFinishedAndCaches(image: UIImage, cachesIdentifier: String, isCachesSuccess: Bool) {
-        if isCachesSuccess == true {
-            imageView.image = image
-        }
+        imageView.image = image
         self.dismissViewControllerAnimated(true, completion: nil)
     }
     

@@ -134,7 +134,9 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
             image = info[UIImagePickerControllerEditedImage] as? UIImage
             if self.isCaches == true && self.identifier != nil && self.identifier != ""{
                 let cachesStatus = saveImageToCaches(image!, identifier: self.identifier!)
-                self.delegate?.selectImageFinishedAndCaches?(image!, cachesIdentifier: self.identifier!, isCachesSuccess: cachesStatus)
+                self.delegate?.selectImageFinishedAndCaches?(image!,
+                                           cachesIdentifier: self.identifier!,
+                                            isCachesSuccess: cachesStatus)
             }else {
                 self.delegate?.selectImageFinished?(image!)
             }
@@ -149,21 +151,18 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
      
      - returns: 读取缓存的图片
      */
-    func readImageFromCaches(identifier:String) -> UIImage {
+    func readImageFromCaches(identifier:String) -> UIImage? {
         let path = jhSavePath + "/" + identifier
         var image:UIImage?
         if NSFileManager.defaultManager().fileExistsAtPath(path) {
             let read = NSFileHandle.init(forReadingAtPath: path)
             let data = read?.readDataToEndOfFile()
             image = UIImage.init(data: data!)
-            //若要判断是否返回正确的缓存图片，可以设置图片的accessibilityIdentifier属性,然后在外部调用的时候判断accessibilityIdentifier属性是否等于你设置的
-            image?.accessibilityIdentifier = identifier
         }else {
-            image = UIImage(named: "jhSurprise.jpg")
-            image?.accessibilityIdentifier = "jhSurprise.jpg"
+            print("read image from caches fail , id:\(identifier)")
         }
         
-        return image!
+        return image
     }
     
     /**
@@ -217,20 +216,22 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
     //缓存图片
     private func saveImageToCaches(image:UIImage,identifier:String) -> Bool {
         let imageData = UIImageJPEGRepresentation(image, 0.5)
-        if  !NSFileManager.defaultManager().fileExistsAtPath(jhSavePath) {//如果不存在文件则创建
-            do {
-                try NSFileManager.defaultManager().createDirectoryAtPath(jhSavePath, withIntermediateDirectories: true, attributes: nil)
-                print("create file success:\(jhSavePath)")
-            }catch{
-                print("create file failure")
-                return false
+        if (imageData != nil) {
+            if  !NSFileManager.defaultManager().fileExistsAtPath(jhSavePath) {//如果不存在文件则创建
+                do {
+                    try NSFileManager.defaultManager().createDirectoryAtPath(jhSavePath, withIntermediateDirectories: true, attributes: nil)
+                    print("create file success:\(jhSavePath)")
+                }catch{
+                    print("create file failure")
+                    return false
+                }
             }
-        }
-        let path = jhSavePath + "/" + identifier
+            let path = jhSavePath + "/" + identifier
 
-        if NSFileManager.defaultManager().createFileAtPath(path, contents: imageData, attributes: nil){
-            print("save pic for id:\(identifier) success")
-            return true
+            if NSFileManager.defaultManager().createFileAtPath(path, contents: imageData, attributes: nil){
+                print("save pic for id:\(identifier) success")
+                return true
+            }
         }
         print("save pic failure")
         return false
