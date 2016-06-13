@@ -75,6 +75,7 @@ EasyUIImagePickerController for Swift
 7.删除指定identifier的缓存图片(删除id：abc)
 
 `self.imagePickerController?.removeCachesPictureForIdentifier("abc")`
+
 删除全部缓存图片
 
     if self.imagePickerController?.removeCachesPictures() == true {
