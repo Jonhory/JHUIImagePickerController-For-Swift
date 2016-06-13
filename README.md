@@ -3,7 +3,7 @@ EasyUIImagePickerController for Swift
 
 
 1.声明
-‘var imagePickerController:JHImagePickerController?’
+'var imagePickerController:JHImagePickerController?'
 
 2.初始化
     //初始化方法一
