@@ -3,6 +3,7 @@ EasyUIImagePickerController for Swift
 
 
 1.声明
+
 `var imagePickerController:JHImagePickerController?`
 
 2.初始化
@@ -19,6 +20,7 @@ EasyUIImagePickerController for Swift
     imagePickerController = JHImagePickerController(isCaches: true, identifier: "abc")
 
 3.设置代理 JHImagePickerControllerDelegate
+
 `imagePickerController?.delegate = self`
 
 4.
@@ -71,6 +73,7 @@ EasyUIImagePickerController for Swift
     }
 
 7.删除指定identifier的缓存图片(删除id：abc)
+
 `self.imagePickerController?.removeCachesPictureForIdentifier("abc")`
 删除全部缓存图片
 
