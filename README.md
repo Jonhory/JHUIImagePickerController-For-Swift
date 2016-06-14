@@ -62,14 +62,13 @@ EasyUIImagePickerController for Swift
         self.dismissViewControllerAnimated(true, completion: nil)
     }
 
-6.根据identifier读取缓存图片(若读取失败，默认返回的image?.accessibilityIdentifier == "jhSurprise.jpg")
+6.根据identifier读取缓存图片
 
     let image = self.imagePickerController?.readImageFromCaches("abc")
     if image?.accessibilityIdentifier != "jhSurprise.jpg" {
         imageView.image = image
     }else {
         print("读取缓存照片失败,请检查图片identifier是否存在")
-        imageView.image = image
     }
 
 7.删除指定identifier的缓存图片(删除id：abc)
