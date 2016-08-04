@@ -51,10 +51,19 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
     weak var delegate:JHImagePickerControllerDelegate?
     /** 是否缓存*/
     var isCaches:Bool?
+    /** 是否设置裁剪模式*/
+    var isEditImage:Bool? {
+        didSet{
+            isEdit = isEditImage
+            imagePickerController.allowsEditing = isEdit!
+        }
+    }
     /** 缓存图片的标识符*/
     var identifier:String?
     
     //private
+    /** 设置是否裁剪*/
+    private var isEdit:Bool? = true
     /** 获取相机权限成功*/
     private var cameraSuccessClosure:cameraSuccess!
     /** 获取相机权限失败*/
@@ -131,7 +140,11 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
     func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
         let mediaType:String = info[UIImagePickerControllerMediaType] as! String
         if mediaType == kUTTypeImage as String{
-            image = info[UIImagePickerControllerEditedImage] as? UIImage
+            if isEdit == true {
+                image = info[UIImagePickerControllerEditedImage] as? UIImage
+            }else {
+                image = info[UIImagePickerControllerOriginalImage] as? UIImage
+            }
             if self.isCaches == true && self.identifier != nil && self.identifier != ""{
                 let cachesStatus = saveImageToCaches(image!, identifier: self.identifier!)
                 self.delegate?.selectImageFinishedAndCaches?(image!,
@@ -210,7 +223,8 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
     private func cameraReady(){
         imagePickerController = UIImagePickerController()
         imagePickerController.delegate = self
-        imagePickerController.allowsEditing = true
+        imagePickerController.allowsEditing = isEdit!
+        print(isEdit!);
     }
     
     //缓存图片

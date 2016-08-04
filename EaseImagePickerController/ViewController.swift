@@ -32,6 +32,8 @@ class ViewController: UIViewController,JHImagePickerControllerDelegate {
         imagePickerController = JHImagePickerController(isCaches: true, identifier: "abc")
         //设置选择图片后回调的代理协议
         imagePickerController?.delegate = self
+        //设置是否使用裁剪模式,默认为true
+//        imagePickerController?.isEditImage = false
         
         imageView = UIImageView(frame: CGRectMake(10, 100, SCREEN.width - 20, SCREEN.height - 280))
         imageView.backgroundColor = UIColor.lightGrayColor()
