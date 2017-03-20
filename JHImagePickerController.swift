@@ -14,11 +14,11 @@ import PhotosUI
 import MobileCoreServices
 
 /** 获取相机权限成功*/
-typealias cameraSuccess   = (imagePickerController:UIImagePickerController)  -> Void
+typealias cameraSuccess   = (_ imagePickerController:UIImagePickerController)  -> Void
 /** 获取相机权限失败*/
 typealias cameraFail      = ()                                               -> Void
 /** 获取相簿权限成功*/
-typealias albumSuccess    = (imagePickerController:UIImagePickerController)  -> Void
+typealias albumSuccess    = (_ imagePickerController:UIImagePickerController)  -> Void
 /** 获取相簿权限失败*/
 typealias albumFail       = ()                                               ->Void
 
@@ -30,7 +30,7 @@ typealias albumFail       = ()                                               ->V
      
      - returns: 返回获取的图片
      */
-    optional func selectImageFinished(image:UIImage)
+    @objc optional func selectImageFinished(_ image:UIImage)
     
     /**
      返回获取的图片并缓存(当设置缓存并且设置缓存标识符时返回该方法)
@@ -40,7 +40,7 @@ typealias albumFail       = ()                                               ->V
      
      - returns: 返回获取的图片并缓存
      */
-    optional func selectImageFinishedAndCaches(image:UIImage,cachesIdentifier:String,isCachesSuccess:Bool)
+    @objc optional func selectImageFinishedAndCaches(_ image:UIImage,cachesIdentifier:String,isCachesSuccess:Bool)
     
 }
 
@@ -63,7 +63,7 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
     
     //private
     /** 设置是否裁剪*/
-    private var isEdit:Bool? = true
+    var isEdit:Bool? = true
     /** 获取相机权限成功*/
     private var cameraSuccessClosure:cameraSuccess!
     /** 获取相机权限失败*/
@@ -95,10 +95,10 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
     }
     
     //MARK:从相机拍摄图片
-    func selectImageFromCameraSuccess(closure:cameraSuccess,Fail failClosure:cameraFail){
+    func selectImageFromCameraSuccess(_ closure:@escaping cameraSuccess,Fail failClosure:@escaping cameraFail){
         cameraFailClosure = failClosure
-        let authStatus = AVCaptureDevice.authorizationStatusForMediaType(AVMediaTypeVideo)
-        if authStatus == .Restricted || authStatus == .Denied{
+        let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+        if authStatus == .restricted || authStatus == .denied{
             if cameraFailClosure != nil {
                 cameraFailClosure()
             }
@@ -106,22 +106,22 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
         }
         
         cameraSuccessClosure = closure
-        if UIImagePickerController.isSourceTypeAvailable(.Camera) {
-            imagePickerController!.sourceType = .Camera
+        if UIImagePickerController.isSourceTypeAvailable(.camera) {
+            imagePickerController!.sourceType = .camera
             imagePickerController!.mediaTypes = [kUTTypeImage as String]
-            imagePickerController!.cameraCaptureMode = .Photo
+            imagePickerController!.cameraCaptureMode = .photo
             if cameraSuccessClosure != nil {
-                cameraSuccessClosure(imagePickerController: imagePickerController!)
+                cameraSuccessClosure(_: imagePickerController!)
             }
         }
         
     }
     
     //MARK:从相簿选取图片
-    func selectImageFromAlbumSuccess(closure:albumSuccess,Fail failClosure:albumFail){
+    func selectImageFromAlbumSuccess(_ closure:@escaping albumSuccess,Fail failClosure:@escaping albumFail){
         albumFailClosure = failClosure
         let status = ALAssetsLibrary.authorizationStatus()
-        if status == .Restricted || status == .Denied {
+        if status == .restricted || status == .denied {
             if albumFailClosure != nil {
                 albumFailClosure()
             }
@@ -129,15 +129,15 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
         }
 
         albumSuccessClosure = closure
-        imagePickerController!.sourceType = .PhotoLibrary
+        imagePickerController!.sourceType = .photoLibrary
         if albumSuccessClosure != nil {
-            albumSuccessClosure(imagePickerController:imagePickerController!)
+            albumSuccessClosure(_: imagePickerController)
         }
     }
     
     //MARK:UIImagePickerControllerDelegate
     //选取图片完成
-    func imagePickerController(picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : AnyObject]) {
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [String : Any]) {
         let mediaType:String = info[UIImagePickerControllerMediaType] as! String
         if mediaType == kUTTypeImage as String{
             if isEdit == true {
@@ -164,11 +164,11 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
      
      - returns: 读取缓存的图片
      */
-    func readImageFromCaches(identifier:String) -> UIImage? {
+    func readImageFromCaches(_ identifier:String) -> UIImage? {
         let path = jhSavePath + "/" + identifier
         var image:UIImage?
-        if NSFileManager.defaultManager().fileExistsAtPath(path) {
-            let read = NSFileHandle.init(forReadingAtPath: path)
+        if FileManager.default.fileExists(atPath: path) {
+            let read = FileHandle.init(forReadingAtPath: path)
             let data = read?.readDataToEndOfFile()
             image = UIImage.init(data: data!)
         }else {
@@ -185,11 +185,11 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
      
      - returns: 删除指定缓存图片
      */
-    func removeCachesPictureForIdentifier(identifier:String) -> Bool{
+    func removeCachesPictureForIdentifier(_ identifier:String) -> Bool{
         let path = jhSavePath + "/" + identifier
-        if NSFileManager.defaultManager().fileExistsAtPath(path) {
+        if FileManager.default.fileExists(atPath: path) {
             do {
-                try NSFileManager.defaultManager().removeItemAtPath(path)
+                try FileManager.default.removeItem(atPath: path)
                 return true
             }catch {
                 print("\(self) remove picture for id:\(identifier) failure")
@@ -206,9 +206,9 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
      - returns: 删除全部缓存图片
      */
     func removeCachesPictures() -> Bool {
-        if NSFileManager.defaultManager().fileExistsAtPath(jhSavePath) {
+        if FileManager.default.fileExists(atPath: jhSavePath) {
             do {
-                try NSFileManager.defaultManager().removeItemAtPath(jhSavePath)
+                try FileManager.default.removeItem(atPath: jhSavePath)
                 return true
             }catch {
                 print("\(self) remove pictures for path:\(jhSavePath) failure")
@@ -228,12 +228,12 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
     }
     
     //缓存图片
-    private func saveImageToCaches(image:UIImage,identifier:String) -> Bool {
+    private func saveImageToCaches(_ image:UIImage,identifier:String) -> Bool {
         let imageData = UIImageJPEGRepresentation(image, 0.5)
         if (imageData != nil) {
-            if  !NSFileManager.defaultManager().fileExistsAtPath(jhSavePath) {//如果不存在文件则创建
+            if  !FileManager.default.fileExists(atPath: jhSavePath) {//如果不存在文件则创建
                 do {
-                    try NSFileManager.defaultManager().createDirectoryAtPath(jhSavePath, withIntermediateDirectories: true, attributes: nil)
+                    try FileManager.default.createDirectory(atPath: jhSavePath, withIntermediateDirectories: true, attributes: nil)
                     print("create file success:\(jhSavePath)")
                 }catch{
                     print("create file failure")
@@ -242,7 +242,7 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
             }
             let path = jhSavePath + "/" + identifier
 
-            if NSFileManager.defaultManager().createFileAtPath(path, contents: imageData, attributes: nil){
+            if FileManager.default.createFile(atPath: path, contents: imageData, attributes: nil){
                 print("save pic for id:\(identifier) success")
                 return true
             }
@@ -254,5 +254,5 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
 
 
 //MARK:缓存图片路径
-let jhCachesPath = NSSearchPathForDirectoriesInDomains(.CachesDirectory, .UserDomainMask, true)[0]
-let jhSavePath = jhCachesPath + "/jhImageCaches"
+private let jhCachesPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+private let jhSavePath = jhCachesPath + "/jhImageCaches"

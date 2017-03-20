@@ -8,7 +8,7 @@
 
 import UIKit
 
-let SCREEN = UIScreen.mainScreen().bounds.size
+let SCREEN = UIScreen.main.bounds.size
 
 class ViewController: UIViewController,JHImagePickerControllerDelegate {
 
@@ -18,7 +18,7 @@ class ViewController: UIViewController,JHImagePickerControllerDelegate {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.view.backgroundColor = UIColor.whiteColor()
+        self.view.backgroundColor = UIColor.white
         
         //初始化方法一
 //        imagePickerController = JHImagePickerController()
@@ -35,9 +35,9 @@ class ViewController: UIViewController,JHImagePickerControllerDelegate {
         //设置是否使用裁剪模式,默认为true
 //        imagePickerController?.isEditImage = false
         
-        imageView = UIImageView(frame: CGRectMake(10, 100, SCREEN.width - 20, SCREEN.height - 280))
-        imageView.backgroundColor = UIColor.lightGrayColor()
-        imageView.contentMode = .ScaleAspectFit
+        imageView = UIImageView(frame: CGRect(x: 10, y: 100, width: SCREEN.width - 20, height: SCREEN.height - 280))
+        imageView.backgroundColor = UIColor.lightGray
+        imageView.contentMode = .scaleAspectFit
         self.view.addSubview(imageView)
         
         creatBtnWithTitle("选取图片", centerY: SCREEN.height - 50, action: #selector(selectImageClicked))
@@ -48,43 +48,43 @@ class ViewController: UIViewController,JHImagePickerControllerDelegate {
         // Do any additional setup after loading the view, typically from a nib.
     }
 
-    func creatBtnWithTitle(title:String,centerY y:CGFloat,action:Selector) {
-        let button = UIButton(frame: CGRectMake(0,0,200,40))
-        button.center = CGPointMake(SCREEN.width/2, y);
-        button.backgroundColor = UIColor.orangeColor()
-        button.addTarget(self, action: action, forControlEvents: .TouchUpInside)
-        button.setTitle(title, forState: .Normal)
+    func creatBtnWithTitle(_ title:String,centerY y:CGFloat,action:Selector) {
+        let button = UIButton(frame: CGRect(x: 0,y: 0,width: 200,height: 40))
+        button.center = CGPoint(x: SCREEN.width/2, y: y);
+        button.backgroundColor = UIColor.orange
+        button.addTarget(self, action: action, for: .touchUpInside)
+        button.setTitle(title, for: UIControlState())
         self.view.addSubview(button)
     }
     
     //选取图片
     func selectImageClicked() {
-        let alert = UIAlertController(title: "", message: "Choose the photo you like", preferredStyle: .Alert)
-        let cameraAction = UIAlertAction(title: "From camera roll", style: .Default) { (action) in
+        let alert = UIAlertController(title: "", message: "Choose the photo you like", preferredStyle: .alert)
+        let cameraAction = UIAlertAction(title: "From camera roll", style: .default) { (action) in
             //图片来自相机闭包 注意使用[weak self] 防止强引用
             self.imagePickerController?.selectImageFromCameraSuccess({[weak self](imagePickerController) in
                     if let strongSelf = self {
-                        strongSelf.presentViewController(imagePickerController, animated: true, completion: nil)
+                        strongSelf.present(imagePickerController, animated: true, completion: nil)
                     }
                 }, Fail: {
                     //SVProgressHUD.showErrorWithStatus("无法获取相机权限")
             })
         }
-        let photoAction = UIAlertAction(title: "Pictures", style: .Default) { (action) in
+        let photoAction = UIAlertAction(title: "Pictures", style: .default) { (action) in
             //图片来自相册闭包 注意使用[weak self] 防止强引用
             self.imagePickerController?.selectImageFromAlbumSuccess({[weak self] (imagePickerController) in
                 if let strongSelf = self {
-                    strongSelf.presentViewController(imagePickerController, animated: true, completion: nil)
+                    strongSelf.present(imagePickerController, animated: true, completion: nil)
                 }
                 }, Fail: {
                     //SVProgressHUD.showErrorWithStatus("无法获取照片权限")
             })
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .Default, handler: nil)
+        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         alert.addAction(cameraAction)
         alert.addAction(photoAction)
         alert.addAction(cancelAction)
-        self.presentViewController(alert, animated: true, completion: nil)
+        self.present(alert, animated: true, completion: nil)
     }
     
     //根据identifier读取缓存图片
@@ -105,15 +105,15 @@ class ViewController: UIViewController,JHImagePickerControllerDelegate {
     
     //MARK:JHImagePickerControllerDelegate
     //当设置了缓存，且输入缓存identifier时返回该方法
-    func selectImageFinishedAndCaches(image: UIImage, cachesIdentifier: String, isCachesSuccess: Bool) {
+    func selectImageFinishedAndCaches(_ image: UIImage, cachesIdentifier: String, isCachesSuccess: Bool) {
         imageView.image = image
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     //当未设置缓存或缓存identifier为空时返回该方法
-    func selectImageFinished(image: UIImage) {
+    func selectImageFinished(_ image: UIImage) {
         imageView.image = image
-        self.dismissViewControllerAnimated(true, completion: nil)
+        self.dismiss(animated: true, completion: nil)
     }
     
     override func didReceiveMemoryWarning() {
