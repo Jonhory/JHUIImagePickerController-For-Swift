@@ -17,6 +17,10 @@ class JHPhotoItem {
         self.title = title
         self.result = result
     }
+    
+    static func ==(lhs: JHPhotoItem, rhs: JHPhotoItem) -> Bool {
+        return lhs.title == rhs.title && lhs.result == rhs.result
+    }
 }
 
 class JHImageListController: UIViewController {
@@ -57,11 +61,25 @@ class JHImageListController: UIViewController {
             let item = collection[i]
             let assetsFetchResult = PHAsset.fetchAssets(in: item , options: resultsOptions)
             
-            if assetsFetchResult.count > 0{
-                print("title:",item.localizedTitle ?? "nil", "   result:",assetsFetchResult)
-                let jhItem = JHPhotoItem(title: item.localizedTitle, result: assetsFetchResult)
-                items.append(jhItem)
+            if item.localizedTitle == "最近删除" || item.localizedTitle == "已隐藏" { continue }
+            
+            print("title:",item.localizedTitle ?? "nil", "   result:",assetsFetchResult)
+            let jhItem = JHPhotoItem(title: item.localizedTitle, result: assetsFetchResult)
+            items.append(jhItem)
+        }
+        
+        var tempItem: JHPhotoItem?
+        for item in items {
+            if item.title == "所有照片" {
+                if let index = items.index(where: { $0 == item } ) {
+                    tempItem = item
+                    items.remove(at: index)
+                    break
+                }
             }
+        }
+        if tempItem != nil {
+            items.insert(tempItem!, at: 0)
         }
         
     }
