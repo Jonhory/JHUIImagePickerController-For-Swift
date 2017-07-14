@@ -57,6 +57,8 @@ class JHImageListCell: UITableViewCell {
         contentView.addSubview(arrowIV)
         
         iconIV.frame = CGRect(x: 0, y: 0, width: JHCellHeight, height: JHCellHeight)
+        iconIV.contentMode = .scaleAspectFill
+        iconIV.clipsToBounds = true
         
         titleLabel.frame = CGRect(x: iconIV.frame.maxX + 5.0, y: 0.0, width: 10.0, height: JHCellHeight)
         titleLabel.font = UIFont.systemFont(ofSize: 17)
@@ -68,6 +70,11 @@ class JHImageListCell: UITableViewCell {
         
         arrowIV.frame = CGRect(x: SCREEN.width - 20, y: 20, width: 10, height: JHCellHeight - 2 * 20)
         arrowIV.backgroundColor = UIColor.orange
+        
+        let line = UIView()
+        line.backgroundColor = UIColor.lightGray
+        line.frame = CGRect(x: 20, y: JHCellHeight - 0.5, width: SCREEN.width - 20, height: 0.5)
+        contentView.addSubview(line)
     }
     
     required init?(coder aDecoder: NSCoder) {

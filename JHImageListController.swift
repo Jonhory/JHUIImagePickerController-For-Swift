@@ -22,12 +22,7 @@ class JHPhotoItem {
 class JHImageListController: UIViewController {
 
     var items: [JHPhotoItem] = []
-    lazy var tableView: UITableView = {
-        let table: UITableView = UITableView(frame: self.view.bounds, style: .plain)
-        table.tableFooterView = UIView()
-        table.backgroundColor = UIColor.yellow
-        return table
-    }()
+    lazy var imageManager = PHCachingImageManager()
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -61,9 +56,11 @@ class JHImageListController: UIViewController {
             resultsOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
             let item = collection[i]
             let assetsFetchResult = PHAsset.fetchAssets(in: item , options: resultsOptions)
+            
             if assetsFetchResult.count > 0{
                 print("title:",item.localizedTitle ?? "nil", "   result:",assetsFetchResult)
-                items.append(JHPhotoItem(title: item.localizedTitle, result: assetsFetchResult))
+                let jhItem = JHPhotoItem(title: item.localizedTitle, result: assetsFetchResult)
+                items.append(jhItem)
             }
         }
         
@@ -103,6 +100,14 @@ class JHImageListController: UIViewController {
         tableView.dataSource = self
     }
     
+    lazy var tableView: UITableView = {
+        let table: UITableView = UITableView(frame: self.view.bounds, style: .plain)
+        table.tableFooterView = UIView()
+        table.backgroundColor = UIColor.white
+        table.separatorStyle = .none
+        return table
+    }()
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
     }
@@ -110,10 +115,23 @@ class JHImageListController: UIViewController {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
     }
-
+    
+    lazy var imageSize: CGSize = {
+        let scale = UIScreen.main.scale
+        return CGSize(width: JHCellHeight * scale , height: JHCellHeight * scale)
+    }()
+    
+    lazy var options: PHImageRequestOptions = {
+        let o = PHImageRequestOptions()
+        o.deliveryMode = .opportunistic
+        o.resizeMode = .fast
+        return o
+    }()
+    
     deinit {
         print("dealloc ",self)
     }
+    
 }
 
 extension JHImageListController: UITableViewDataSource, UITableViewDelegate {
@@ -124,6 +142,12 @@ extension JHImageListController: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = JHImageListCell.configWith(table: tableView)
         cell.item = items[indexPath.row]
+        
+        if let asset = items[indexPath.row].result.firstObject {
+            imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: options, resultHandler: { (image, dic) in
+                cell.iconIV.image = image
+            })
+        }
         return cell
     }
     
