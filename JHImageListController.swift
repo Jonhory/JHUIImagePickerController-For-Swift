@@ -24,11 +24,17 @@ class JHImageListController: UIViewController {
         }
     }
     
+    func cancelClicked() {
+        dismiss(animated: true)
+    }
+    
     private func setRightBtn() {
         let btn = UIButton(type: .system)
+        btn.frame = CGRect(x: 0, y: 0, width: 34, height: 20.5)
         btn.setTitle("取消", for: .normal)
+        btn.addTarget(self, action: #selector(cancelClicked), for: .touchUpInside)
+        btn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
         btn.setTitleColor(UIColor.white, for: .normal)
-        btn.backgroundColor = UIColor.red
         navigationItem.rightBarButtonItem = UIBarButtonItem(customView: btn)
     }
 
