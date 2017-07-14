@@ -13,16 +13,16 @@ import Photos
 import PhotosUI
 import MobileCoreServices
 
+//MARK:缓存图片路径
+private let jhCachesPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
+private let jhSavePath = jhCachesPath + "/jhImageCaches"
+
 /** 获取相机权限成功*/
 typealias cameraSuccess   = (_ imagePickerController:UIImagePickerController)  -> Void
-/** 获取相机权限失败*/
-typealias cameraFail      = ()                                               -> Void
 /** 获取相簿权限成功*/
-typealias albumSuccess    = (_ imagePickerController:UIImagePickerController)  -> Void
-/** 获取相簿权限失败*/
-typealias albumFail       = ()                                               ->Void
+typealias albumSuccess    = (_ imagePickerController:JHImagePickerController)  -> Void
 
-@objc protocol JHImagePickerControllerDelegate: class {
+@objc protocol JHImagePickerDelegate: class {
     /**
      获取图片回调
      
@@ -44,11 +44,11 @@ typealias albumFail       = ()                                               ->V
     
 }
 
-class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
+class JHImagePicker: NSObject,UIImagePickerControllerDelegate,UINavigationControllerDelegate {
 
     //publice
     /** 选取图片代理*/
-    weak var delegate:JHImagePickerControllerDelegate?
+    weak var delegate:JHImagePickerDelegate?
     /** 是否缓存*/
     var isCaches:Bool?
     /** 是否设置裁剪模式*/
@@ -64,16 +64,10 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
     //private
     /** 设置是否裁剪*/
     var isEdit:Bool? = true
-    /** 获取相机权限成功*/
-    private var cameraSuccessClosure:cameraSuccess!
-    /** 获取相机权限失败*/
-    private var cameraFailClosure:cameraFail!
-    /** 获取相簿权限成功*/
-    private var albumSuccessClosure:albumSuccess!
-    /** 获取相簿权限失败*/
-    private var albumFailClosure:albumFail!
-    /** UIImagePickerController*/
-    private var imagePickerController:UIImagePickerController! = nil
+    /** 拍照用系统UIImagePickerController*/
+    private var imagePickerController:UIImagePickerController!
+    /** 选择图片用自定义*/
+    private lazy var selectImagePickerController: JHImagePickerController = JHImagePickerController()
     /** 选取的图片*/
     private var image:UIImage?
     
@@ -95,44 +89,35 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
     }
     
     //MARK:从相机拍摄图片
-    func selectImageFromCameraSuccess(_ closure:@escaping cameraSuccess,Fail failClosure:@escaping cameraFail){
-        cameraFailClosure = failClosure
+    func selectImageFromCameraSuccess(_ closure:@escaping cameraSuccess,Fail failClosure:((Void) -> Void)? = nil){
         let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
         if authStatus == .restricted || authStatus == .denied{
-            if cameraFailClosure != nil {
-                cameraFailClosure()
+            if failClosure != nil {
+                failClosure!()
             }
             return
         }
         
-        cameraSuccessClosure = closure
         if UIImagePickerController.isSourceTypeAvailable(.camera) {
             imagePickerController!.sourceType = .camera
             imagePickerController!.mediaTypes = [kUTTypeImage as String]
             imagePickerController!.cameraCaptureMode = .photo
-            if cameraSuccessClosure != nil {
-                cameraSuccessClosure(_: imagePickerController!)
-            }
+            closure(imagePickerController)
         }
         
     }
     
     //MARK:从相簿选取图片
-    func selectImageFromAlbumSuccess(_ closure:@escaping albumSuccess,Fail failClosure:@escaping albumFail){
-        albumFailClosure = failClosure
+    func selectImageFromAlbumSuccess(_ closure:@escaping albumSuccess,Fail failClosure:((Void) -> Void)? = nil){
         let status = ALAssetsLibrary.authorizationStatus()
         if status == .restricted || status == .denied {
-            if albumFailClosure != nil {
-                albumFailClosure()
+            if failClosure != nil {
+                failClosure!()
             }
             return
         }
-
-        albumSuccessClosure = closure
-        imagePickerController!.sourceType = .photoLibrary
-        if albumSuccessClosure != nil {
-            albumSuccessClosure(_: imagePickerController)
-        }
+        
+        closure(selectImagePickerController)
     }
     
     //MARK:UIImagePickerControllerDelegate
@@ -252,7 +237,40 @@ class JHImagePickerController: NSObject,UIImagePickerControllerDelegate,UINaviga
     }
 }
 
-
-//MARK:缓存图片路径
-private let jhCachesPath = NSSearchPathForDirectoriesInDomains(.cachesDirectory, .userDomainMask, true)[0]
-private let jhSavePath = jhCachesPath + "/jhImageCaches"
+class JHImagePickerController: UIViewController {
+    
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        getAllPictures()
+        view.backgroundColor = UIColor.red
+        print("init = ", self)
+    }
+    
+    func getAllPictures() {
+        let assetsLibrary = ALAssetsLibrary()
+        var assets: [ALAsset] = []
+        var count = 0
+        assetsLibrary.enumerateGroups(withTypes: ALAssetsGroupType(ALAssetsGroupSavedPhotos), using: { (group, stop) in
+            if group != nil {
+                //                let assetBlock: ALAssetsGroupEnumerationResultsBlock =
+                group!.enumerateAssets({ (resulte, index, stop) in
+                    if resulte != nil {
+                        assets.append(resulte!)
+                        count += 1
+                    }
+                })
+                print("total == ", count , " png")
+            }
+        }) { (fail) in
+            print("fail .. ", fail ?? "no error")
+        }
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        dismiss(animated: true)
+    }
+    
+    deinit {
+        print("dealloc :", self)
+    }
+}
