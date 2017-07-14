@@ -16,7 +16,7 @@ class ViewController: UIViewController,JHImagePickerDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.view.backgroundColor = UIColor.lightGray
-        loadImages()
+//        loadImages()
     }
     
     func loadImages() {

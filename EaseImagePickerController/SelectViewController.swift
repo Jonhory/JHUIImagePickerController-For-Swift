@@ -71,15 +71,7 @@ class SelectViewController: UIViewController, JHImagePickerDelegate {
             })
         }
         let photoAction = UIAlertAction(title: "Pictures", style: .default) { (action) in
-            //图片来自相册闭包 注意使用[weak self] 防止强引用
-            self.imagePicker?.selectImageFromAlbumSuccess({[weak self] (imagePickerController) in
-                if let strongSelf = self {
-                    strongSelf.present(imagePickerController, animated: true, completion: nil)
-                }
-                }, Fail: {
-                    //SVProgressHUD.showErrorWithStatus("无法获取照片权限")
-            })
-            
+            _ = self.jh_presentPhotoVC(1)
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         alert.addAction(cameraAction)
@@ -125,16 +117,5 @@ class SelectViewController: UIViewController, JHImagePickerDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }

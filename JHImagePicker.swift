@@ -8,7 +8,6 @@
 
 import UIKit
 import AVFoundation
-import AssetsLibrary
 import Photos
 import PhotosUI
 import MobileCoreServices
@@ -19,8 +18,6 @@ private let jhSavePath = jhCachesPath + "/jhImageCaches"
 
 /** 获取相机权限成功*/
 typealias cameraSuccess   = (_ imagePickerController:UIImagePickerController)  -> Void
-/** 获取相簿权限成功*/
-typealias albumSuccess    = (_ imagePickerController:JHImagePickerController)  -> Void
 
 @objc protocol JHImagePickerDelegate: class {
     /**
@@ -66,8 +63,6 @@ class JHImagePicker: NSObject,UIImagePickerControllerDelegate,UINavigationContro
     var isEdit:Bool? = true
     /** 拍照用系统UIImagePickerController*/
     private var imagePickerController:UIImagePickerController!
-    /** 选择图片用自定义*/
-    private lazy var selectImagePickerController: JHImagePickerController = JHImagePickerController()
     /** 选取的图片*/
     private var image:UIImage?
     
@@ -105,19 +100,6 @@ class JHImagePicker: NSObject,UIImagePickerControllerDelegate,UINavigationContro
             closure(imagePickerController)
         }
         
-    }
-    
-    //MARK:从相簿选取图片
-    func selectImageFromAlbumSuccess(_ closure:@escaping albumSuccess,Fail failClosure:((Void) -> Void)? = nil){
-        let status = ALAssetsLibrary.authorizationStatus()
-        if status == .restricted || status == .denied {
-            if failClosure != nil {
-                failClosure!()
-            }
-            return
-        }
-        
-        closure(selectImagePickerController)
     }
     
     //MARK:UIImagePickerControllerDelegate
@@ -237,40 +219,3 @@ class JHImagePicker: NSObject,UIImagePickerControllerDelegate,UINavigationContro
     }
 }
 
-class JHImagePickerController: UIViewController {
-    
-    override func viewDidLoad() {
-        super.viewDidLoad()
-        getAllPictures()
-        view.backgroundColor = UIColor.red
-        print("init = ", self)
-    }
-    
-    func getAllPictures() {
-        let assetsLibrary = ALAssetsLibrary()
-        var assets: [ALAsset] = []
-        var count = 0
-        assetsLibrary.enumerateGroups(withTypes: ALAssetsGroupType(ALAssetsGroupSavedPhotos), using: { (group, stop) in
-            if group != nil {
-                //                let assetBlock: ALAssetsGroupEnumerationResultsBlock =
-                group!.enumerateAssets({ (resulte, index, stop) in
-                    if resulte != nil {
-                        assets.append(resulte!)
-                        count += 1
-                    }
-                })
-                print("total == ", count , " png")
-            }
-        }) { (fail) in
-            print("fail .. ", fail ?? "no error")
-        }
-    }
-    
-    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        dismiss(animated: true)
-    }
-    
-    deinit {
-        print("dealloc :", self)
-    }
-}
