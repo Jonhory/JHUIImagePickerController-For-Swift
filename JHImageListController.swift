@@ -28,6 +28,17 @@ class JHImageListController: UIViewController {
     var items: [JHPhotoItem] = []
     lazy var imageManager = PHCachingImageManager()
     
+    var isFirstEnter = true
+    override func viewWillAppear(_ animated: Bool) {
+        super.viewWillAppear(animated)
+        if isFirstEnter {
+            let vc = JHImagePhotosVC()
+            vc.item = items.first
+            navigationController?.pushViewController(vc, animated: false)
+            isFirstEnter = false
+        }
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -56,11 +67,11 @@ class JHImageListController: UIViewController {
         
         for i in 0..<collection.count{
             let resultsOptions = PHFetchOptions()
-            resultsOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: false)]
+            resultsOptions.sortDescriptors = [NSSortDescriptor(key: "creationDate", ascending: true)]
             resultsOptions.predicate = NSPredicate(format: "mediaType = %d", PHAssetMediaType.image.rawValue)
             let item = collection[i]
             let assetsFetchResult = PHAsset.fetchAssets(in: item , options: resultsOptions)
-            
+            // 移除 最近删除 和 已隐藏 数据源
             if item.localizedTitle == "最近删除" || item.localizedTitle == "已隐藏" { continue }
             
             print("title:",item.localizedTitle ?? "nil", "   result:",assetsFetchResult)
@@ -68,6 +79,7 @@ class JHImageListController: UIViewController {
             items.append(jhItem)
         }
         
+        // 将 所有照片 数据源放到顶部
         var tempItem: JHPhotoItem?
         for item in items {
             if item.title == "所有照片" {
@@ -91,19 +103,13 @@ class JHImageListController: UIViewController {
     
     // MARK: - UI渲染
     private func setRightBtn() {
-        let btn = UIButton(type: .system)
-        btn.frame = CGRect(x: 0, y: 0, width: 34, height: 20.5)
-        btn.setTitle("取消", for: .normal)
-        btn.addTarget(self, action: #selector(cancelClicked), for: .touchUpInside)
-        btn.titleLabel?.font = UIFont.systemFont(ofSize: 16)
-        btn.setTitleColor(UIColor.white, for: .normal)
-        navigationItem.rightBarButtonItem = UIBarButtonItem(customView: btn)
+        navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(cancelClicked))
     }
 
     private func showUnablePhoto() {
         let label = UILabel()
         label.text = "请在iPhone的“设置-隐私-照片”选项中，允许本应用访问你的手机相册。"
-        label.frame = CGRect(x: 60, y: 120, width: SCREEN.width - 120, height: 20)
+        label.frame = CGRect(x: 60, y: 120, width: jhSCREEN.width - 120, height: 20)
         label.numberOfLines = 0
         label.textAlignment = .center
         label.textColor = UIColor.black
@@ -153,6 +159,14 @@ class JHImageListController: UIViewController {
 }
 
 extension JHImageListController: UITableViewDataSource, UITableViewDelegate {
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        print(items[indexPath.row].title!)
+        let vc = JHImagePhotosVC()
+        vc.item = items[indexPath.row]
+        navigationController?.pushViewController(vc, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return items.count
     }

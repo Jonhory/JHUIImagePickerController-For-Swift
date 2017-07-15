@@ -68,12 +68,12 @@ class JHImageListCell: UITableViewCell {
         countLabel.font = UIFont.systemFont(ofSize: 16)
         countLabel.textColor = UIColor.lightGray
         
-        arrowIV.frame = CGRect(x: SCREEN.width - 20, y: 20, width: 10, height: JHCellHeight - 2 * 20)
+        arrowIV.frame = CGRect(x: jhSCREEN.width - 20, y: 20, width: 10, height: JHCellHeight - 2 * 20)
         arrowIV.backgroundColor = UIColor.orange
         
         let line = UIView()
         line.backgroundColor = UIColor.lightGray
-        line.frame = CGRect(x: 20, y: JHCellHeight - 0.5, width: SCREEN.width - 20, height: 0.5)
+        line.frame = CGRect(x: 20, y: JHCellHeight - 0.5, width: jhSCREEN.width - 20, height: 0.5)
         contentView.addSubview(line)
     }
     

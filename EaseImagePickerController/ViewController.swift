@@ -9,8 +9,6 @@
 import UIKit
 import Photos
 
-let SCREEN = UIScreen.main.bounds.size
-
 class ViewController: UIViewController,JHImagePickerDelegate {
 
     override func viewDidLoad() {

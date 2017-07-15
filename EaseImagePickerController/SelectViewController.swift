@@ -34,23 +34,23 @@ class SelectViewController: UIViewController, JHImagePickerDelegate {
         //设置是否使用裁剪模式,默认为true
         //        imagePicker?.isEditImage = false
         
-        imageView = UIImageView(frame: CGRect(x: 10, y: 100, width: SCREEN.width - 20, height: SCREEN.height - 280))
+        imageView = UIImageView(frame: CGRect(x: 10, y: 100, width: jhSCREEN.width - 20, height: jhSCREEN.height - 280))
         imageView.backgroundColor = UIColor.lightGray
         imageView.contentMode = .scaleAspectFit
         self.view.addSubview(imageView)
         
-        creatBtnWithTitle("选取图片", centerY: SCREEN.height - 50, action: #selector(selectImageClicked))
+        creatBtnWithTitle("选取图片", centerY: jhSCREEN.height - 50, action: #selector(selectImageClicked))
         
-        creatBtnWithTitle("读取图片", centerY: SCREEN.height - 100, action: #selector(readImageClicked))
+        creatBtnWithTitle("读取图片", centerY: jhSCREEN.height - 100, action: #selector(readImageClicked))
         
-        creatBtnWithTitle("删除全部缓存", centerY: SCREEN.height - 150, action: #selector(deleteImageClicked))
+        creatBtnWithTitle("删除全部缓存", centerY: jhSCREEN.height - 150, action: #selector(deleteImageClicked))
         
         //        getAllPictures()
     }
     
     func creatBtnWithTitle(_ title:String,centerY y:CGFloat,action:Selector) {
         let button = UIButton(frame: CGRect(x: 0,y: 0,width: 200,height: 40))
-        button.center = CGPoint(x: SCREEN.width/2, y: y);
+        button.center = CGPoint(x: jhSCREEN.width/2, y: y);
         button.backgroundColor = UIColor.orange
         button.addTarget(self, action: action, for: .touchUpInside)
         button.setTitle(title, for: UIControlState())

@@ -10,6 +10,7 @@ import Foundation
 import UIKit
 import Photos
 
+let jhSCREEN = UIScreen.main.bounds.size
 
 /// 校验相机权限
 ///
@@ -41,6 +42,7 @@ extension UIViewController {
         let nav = UINavigationController(rootViewController: vc)
         nav.navigationBar.barStyle = .black
         nav.navigationBar.backgroundColor = UIColor.black
+        nav.navigationBar.tintColor = UIColor.white
         present(nav, animated: true)
         return vc
     }
