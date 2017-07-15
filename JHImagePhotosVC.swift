@@ -9,9 +9,18 @@
 import UIKit
 import Photos
 
+class JHPhotoItem {
+    var asset: PHAsset?
+    var isSelected: Bool = false
+    
+    init(asset: PHAsset) {
+        self.asset = asset
+    }
+}
+
 class JHImagePhotosVC: UIViewController {
 
-    var item: JHPhotoItem? {
+    var item: JHListtem? {
         didSet {
             title = item?.title
             assets = item?.result
@@ -20,6 +29,9 @@ class JHImagePhotosVC: UIViewController {
     
     var collectionView: UICollectionView?
     var assets: PHFetchResult<PHAsset>!
+    // 数据源
+    var photos: [JHPhotoItem] = []
+    
     var imageManager = PHCachingImageManager()
     
     override func viewWillAppear(_ animated: Bool) {
@@ -33,12 +45,20 @@ class JHImagePhotosVC: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = UIColor.black
         setRightBtn()
-        
+        handleDatasource()
         print(assets)
         loadCollectionView()
     }
     
     // MARK: - 逻辑处理
+    func handleDatasource() {
+        for i in 0..<assets.count {
+            let asset = assets[i]
+            let item = JHPhotoItem(asset: asset)
+            photos.append(item)
+        }
+    }
+    
     func scrollToBottom() {
         let indexPath = IndexPath(row: assets.count - 1, section: 0)
         collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: false)
@@ -122,15 +142,20 @@ extension JHImagePhotosVC: UICollectionViewDelegate {
 extension JHImagePhotosVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return assets.count
+        return photos.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell: JHImagePhotosCell = collectionView.dequeueReusableCell(withReuseIdentifier: JHImagePhotosCellID, for: indexPath) as! JHImagePhotosCell
         
-        imageManager.requestImage(for: assets[indexPath.row], targetSize: imageSize, contentMode: .aspectFill, options: options, resultHandler: { (image, dic) in
-            cell.iv.image = image
-        })
+        let item = photos[indexPath.row]
+        cell.item = item
+        
+        if let asset = item.asset {
+            imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: options, resultHandler: { (image, dic) in
+                cell.iv.image = image
+            })
+        }
         
         return cell
     }

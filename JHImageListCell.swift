@@ -28,7 +28,7 @@ class JHImageListCell: UITableViewCell {
         loadUI()
     }
     
-    var item: JHPhotoItem? {
+    var item: JHListtem? {
         didSet {
             if item == nil { return }
             if let text = item!.title {
@@ -68,8 +68,9 @@ class JHImageListCell: UITableViewCell {
         countLabel.font = UIFont.systemFont(ofSize: 16)
         countLabel.textColor = UIColor.lightGray
         
-        arrowIV.frame = CGRect(x: jhSCREEN.width - 20, y: 20, width: 10, height: JHCellHeight - 2 * 20)
-        arrowIV.backgroundColor = UIColor.orange
+        let arrowWH: CGFloat = 16
+        arrowIV.image = UIImage(named: "jh_arrow")
+        arrowIV.frame = CGRect(x: jhSCREEN.width - 11 - arrowWH, y: (JHCellHeight - arrowWH)/2, width: arrowWH, height: arrowWH)
         
         let line = UIView()
         line.backgroundColor = UIColor.lightGray

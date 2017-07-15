@@ -9,7 +9,7 @@
 import UIKit
 import Photos
 
-class JHPhotoItem {
+class JHListtem {
     var title: String?
     var result: PHFetchResult<PHAsset>
     
@@ -18,14 +18,14 @@ class JHPhotoItem {
         self.result = result
     }
     
-    static func ==(lhs: JHPhotoItem, rhs: JHPhotoItem) -> Bool {
+    static func ==(lhs: JHListtem, rhs: JHListtem) -> Bool {
         return lhs.title == rhs.title && lhs.result == rhs.result
     }
 }
 
 class JHImageListController: UIViewController {
 
-    var items: [JHPhotoItem] = []
+    var items: [JHListtem] = []
     lazy var imageManager = PHCachingImageManager()
     
     var isFirstEnter = true
@@ -75,12 +75,12 @@ class JHImageListController: UIViewController {
             if item.localizedTitle == "最近删除" || item.localizedTitle == "已隐藏" { continue }
             
             print("title:",item.localizedTitle ?? "nil", "   result:",assetsFetchResult)
-            let jhItem = JHPhotoItem(title: item.localizedTitle, result: assetsFetchResult)
+            let jhItem = JHListtem(title: item.localizedTitle, result: assetsFetchResult)
             items.append(jhItem)
         }
         
         // 将 所有照片 数据源放到顶部
-        var tempItem: JHPhotoItem?
+        var tempItem: JHListtem?
         for item in items {
             if item.title == "所有照片" {
                 if let index = items.index(where: { $0 == item } ) {
@@ -173,7 +173,6 @@ extension JHImageListController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = JHImageListCell.configWith(table: tableView)
-        cell.item = items[indexPath.row]
         
         if let asset = items[indexPath.row].result.firstObject {
             imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: options, resultHandler: { (image, dic) in

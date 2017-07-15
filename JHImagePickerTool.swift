@@ -48,3 +48,26 @@ extension UIViewController {
     }
     
 }
+
+// MARK: - UIView
+extension UIView {
+    func showAnimation(_ duration: TimeInterval = 0.6, _ maxScale: CGFloat = 1.1, _ minScale: CGFloat = 0.9) {
+        let time: TimeInterval = duration / 3
+        UIView.animate(withDuration: time, animations: {
+            self.transform = CGAffineTransform(scaleX: maxScale, y: maxScale)
+        }) { (finished) in
+            if finished {
+                UIView.animate(withDuration: time, animations: {
+                    self.transform = CGAffineTransform(scaleX: minScale, y: minScale)
+                }, completion: { (finished2) in
+                    if finished2 {
+                        UIView.animate(withDuration: time, animations: {
+                            self.transform = CGAffineTransform.identity
+                        })
+                    }
+                })
+            }
+        }
+    }
+}
+
