@@ -173,7 +173,7 @@ extension JHImageListController: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = JHImageListCell.configWith(table: tableView)
-        
+        cell.item = items[indexPath.row]
         if let asset = items[indexPath.row].result.firstObject {
             imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: options, resultHandler: { (image, dic) in
                 cell.iconIV.image = image

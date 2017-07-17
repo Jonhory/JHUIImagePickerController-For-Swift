@@ -60,6 +60,7 @@ class JHImagePhotosVC: UIViewController {
     }
     
     func scrollToBottom() {
+        if assets.count <= 1 { return }
         let indexPath = IndexPath(row: assets.count - 1, section: 0)
         collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: false)
         
