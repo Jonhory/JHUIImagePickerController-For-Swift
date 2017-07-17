@@ -43,7 +43,7 @@ class JHImagePhotosCell: UICollectionViewCell {
     let btnWH: CGFloat = 27
     let iv = UIImageView()
     let selectBtn = UIButton(type: .custom)
-    let maskV = UIView()
+    let maskV = UIButton(type: .custom)
     
     private func loadUI() {
         
@@ -51,14 +51,12 @@ class JHImagePhotosCell: UICollectionViewCell {
         iv.clipsToBounds = true
         iv.frame = CGRect(x: 0, y: 0, width: JHPhotosCellWH, height: JHPhotosCellWH)
         iv.backgroundColor = UIColor.lightGray
-        iv.isUserInteractionEnabled = false
         contentView.addSubview(iv)
         
         maskV.frame = iv.frame
         maskV.backgroundColor = UIColor.white
         maskV.alpha = 0.5
         maskV.isHidden = true
-        maskV.isUserInteractionEnabled = true
         contentView.addSubview(maskV)
         
         let image = UIImage(named: "jh_select")
