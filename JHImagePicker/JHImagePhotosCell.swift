@@ -30,11 +30,6 @@ class JHImagePhotosCell: UICollectionViewCell {
     }
     
     func selectBtnClick(_ btn: UIButton) {
-//        btn.isSelected = !btn.isSelected
-//        item?.isSelected = btn.isSelected
-//        if btn.isSelected == true {
-//            btn.showAnimation()
-//        }
         if item != nil {
             delegate?.photsCellClicked(withItem: item!, btn: btn)
         }
@@ -70,6 +65,7 @@ class JHImagePhotosCell: UICollectionViewCell {
         let image2 = UIImage(named: "jh_selected")
         
         selectBtn.setBackgroundImage(image, for: .normal)
+        selectBtn.setBackgroundImage(image, for: .highlighted)
         selectBtn.setBackgroundImage(image2, for: .selected)
         selectBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
         

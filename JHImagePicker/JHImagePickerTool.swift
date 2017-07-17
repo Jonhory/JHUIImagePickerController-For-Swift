@@ -52,22 +52,21 @@ extension UIViewController {
 // MARK: - UIView
 extension UIView {
     func showAnimation(_ duration: TimeInterval = 0.6, _ maxScale: CGFloat = 1.1, _ minScale: CGFloat = 0.9) {
-        let time: TimeInterval = duration / 3
-        UIView.animate(withDuration: time, animations: {
-            self.transform = CGAffineTransform(scaleX: maxScale, y: maxScale)
-        }) { (finished) in
-            if finished {
-                UIView.animate(withDuration: time, animations: {
-                    self.transform = CGAffineTransform(scaleX: minScale, y: minScale)
-                }, completion: { (finished2) in
-                    if finished2 {
-                        UIView.animate(withDuration: time, animations: {
-                            self.transform = CGAffineTransform.identity
-                        })
-                    }
-                })
-            }
-        }
+        
+        print("😯😯😯😯😯😯😯😯😯😯😯😯😯😯")
+        
+        UIView.animateKeyframes(withDuration: duration, delay: 0, options: .allowUserInteraction, animations: { 
+            UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: duration/3, animations: {
+                self.transform = CGAffineTransform(scaleX: maxScale, y: maxScale)
+            })
+            UIView.addKeyframe(withRelativeStartTime: duration/3, relativeDuration: duration/3*2, animations: {
+                self.transform = CGAffineTransform(scaleX: minScale, y: minScale)
+            })
+            UIView.addKeyframe(withRelativeStartTime: duration/3*2, relativeDuration: duration, animations: {
+                self.transform = CGAffineTransform.identity
+            })
+        }, completion: nil)
+        
     }
 }
 

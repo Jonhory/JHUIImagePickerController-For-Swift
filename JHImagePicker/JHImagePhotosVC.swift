@@ -20,6 +20,7 @@ class JHPhotoItem {
     // 选中时显示的数字
     var index: Int = 1
     var indexP: IndexPath?
+    var image: UIImage?
     
     init(asset: PHAsset) {
         self.asset = asset
@@ -46,9 +47,14 @@ class JHImagePhotosVC: UIViewController {
     var assets: PHFetchResult<PHAsset>!
     // 数据源
     var photos: [JHPhotoItem] = []
+    // 获取图片
     var imageManager = PHCachingImageManager()
+    // 图片缓存
+    var imagesDict: [Int: UIImage] = [:]
     // 已选图片
     var selectedPhotos: [JHPhotoItem] = []
+    // 是否已展示蒙版
+    var isShowMask = false
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -86,7 +92,8 @@ class JHImagePhotosVC: UIViewController {
     
     // MARK: - UI事件
     func cancelClicked() {
-        dismiss(animated: true)
+//        dismiss(animated: true)
+        collectionView?.reloadData()
     }
     
     // MARK: - UI渲染
@@ -123,7 +130,7 @@ class JHImagePhotosVC: UIViewController {
     
     lazy var options: PHImageRequestOptions = {
         let o = PHImageRequestOptions()
-        o.deliveryMode = .opportunistic
+        o.deliveryMode = .highQualityFormat
         o.resizeMode = .fast
         return o
     }()
@@ -166,9 +173,14 @@ extension JHImagePhotosVC: UICollectionViewDataSource {
         cell.item = item
         cell.delegate = self
         if let asset = item.asset {
-            imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: options, resultHandler: { (image, dic) in
-                cell.iv.image = image
-            })
+            if item.image == nil {
+                imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: options, resultHandler: { (image, dic) in
+                    cell.iv.image = image
+                    item.image = image
+                })
+            } else {
+                cell.iv.image = item.image
+            }
         }
         
         return cell
@@ -180,22 +192,29 @@ extension JHImagePhotosVC: JHImagePhotosCellDelegate {
     func photsCellClicked(withItem: JHPhotoItem, btn: UIButton) {
         print(withItem.isSelected)
         if withItem.isSelected {
+            var indexPs: [IndexPath] = []
             if let index = selectedPhotos.index(where: { $0 == withItem } ) {
                 selectedPhotos.remove(at: index)
                 for i in (withItem.index - 1)..<selectedPhotos.count {
                     let otherItem = selectedPhotos[i]
                     otherItem.index -= 1
-                    collectionView?.reloadItems(at: [otherItem.indexP!])
+                    indexPs.append(otherItem.indexP!)
                 }
             }
             withItem.isSelected = false
             btn.isSelected  = false
+            
+            if !reloadDatas() {
+                collectionView?.reloadItems(at: indexPs)
+            }
+            
             return
         }
         if selectedPhotos.count >= maxCount {
             print("你最多只能选择\(maxCount)张照片")
             return
         }
+        
         if withItem.isSelected == false {
             withItem.isSelected = true
             btn.isSelected = true
@@ -206,7 +225,21 @@ extension JHImagePhotosVC: JHImagePhotosCellDelegate {
             btn.showAnimation()
             selectedPhotos.append(withItem)
         }
-        if selectedPhotos.count >= maxCount {
+        _ = reloadDatas()
+    }
+    
+    func reloadDatas() -> Bool {
+        if selectedPhotos.count == maxCount - 1 && isShowMask {
+            isShowMask = false
+            for photo in photos {
+                photo.isAble = true
+            }
+            collectionView?.reloadData()
+            return true
+        }
+        
+        if selectedPhotos.count >= maxCount && !isShowMask{
+            isShowMask = true
             for photo in photos {
                 if photo.isSelected == false {
                     photo.isAble = false
@@ -215,6 +248,8 @@ extension JHImagePhotosVC: JHImagePhotosCellDelegate {
                 }
             }
             collectionView?.reloadData()
+            return true
         }
+        return false
     }
 }
