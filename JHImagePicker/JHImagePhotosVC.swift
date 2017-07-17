@@ -31,6 +31,8 @@ class JHPhotoItem {
     }
 }
 
+typealias JHImagePhotosCompletion = (_ images: [JHPhotoItem]) -> Void
+
 class JHImagePhotosVC: UIViewController {
 
     var item: JHListtem? {
@@ -39,6 +41,7 @@ class JHImagePhotosVC: UIViewController {
             assets = item?.result
         }
     }
+    var block: JHImagePhotosCompletion?
     
     // 最多选择张数
     public var maxCount: Int = 9
@@ -95,8 +98,7 @@ class JHImagePhotosVC: UIViewController {
     
     // MARK: - UI事件
     func cancelClicked() {
-//        dismiss(animated: true)
-        collectionView?.reloadData()
+        dismiss(animated: true)
     }
     
     // MARK: - UI渲染
@@ -272,6 +274,10 @@ extension JHImagePhotosVC: JHImagePhotosBarDelegate {
             break
         case .finished:
             print(selectedPhotos)
+            dismiss(animated: true, completion: nil)
+            if block != nil {
+                block!(selectedPhotos)
+            }
             break
         }
     }

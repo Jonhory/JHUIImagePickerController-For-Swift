@@ -25,6 +25,7 @@ class JHListtem {
 
 class JHImageListController: UIViewController {
 
+    var myBlock: JHImagePhotosCompletion?
     var items: [JHListtem] = []
     lazy var imageManager = PHCachingImageManager()
     
@@ -37,6 +38,7 @@ class JHImageListController: UIViewController {
             let vc = JHImagePhotosVC()
             vc.item = items.first
             vc.maxCount = listMaxCount
+            vc.block = myBlock
             print("最多", listMaxCount)
             navigationController?.pushViewController(vc, animated: false)
             isFirstEnter = false
@@ -169,6 +171,7 @@ extension JHImageListController: UITableViewDataSource, UITableViewDelegate {
         let vc = JHImagePhotosVC()
         vc.item = items[indexPath.row]
         vc.maxCount = listMaxCount
+        vc.block = myBlock
         navigationController?.pushViewController(vc, animated: true)
     }
     

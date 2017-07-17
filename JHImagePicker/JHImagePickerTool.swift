@@ -37,9 +37,10 @@ func authorize(_ status: PHAuthorizationStatus = PHPhotoLibrary.authorizationSta
 // MARK: - UIViewController
 extension UIViewController {
     
-    func jh_presentPhotoVC(_ maxCount: Int, completeHandler: ((_ assets: [PHAsset]) -> Void)? = nil) -> JHImageListController {
+    func jh_presentPhotoVC(_ maxCount: Int, completeHandler: @escaping JHImagePhotosCompletion) -> JHImageListController {
         let vc = JHImageListController()
         vc.listMaxCount = maxCount
+        vc.myBlock = completeHandler
         let nav = UINavigationController(rootViewController: vc)
         nav.navigationBar.barStyle = .black
         nav.navigationBar.tintColor = UIColor.white

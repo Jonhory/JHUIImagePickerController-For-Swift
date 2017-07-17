@@ -71,7 +71,9 @@ class SelectViewController: UIViewController, JHImagePickerDelegate {
             })
         }
         let photoAction = UIAlertAction(title: "Pictures", style: .default) { (action) in
-            _ = self.jh_presentPhotoVC(1)
+            _ = self.jh_presentPhotoVC(1, completeHandler: { items in
+                print(items)
+            })
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
         alert.addAction(cameraAction)
