@@ -123,6 +123,7 @@ class JHImagePhotosVC: UIViewController {
         /// 蒙板
         let f2 = CGRect(x: 0, y: jhSCREEN.height - 44, width: jhSCREEN.width, height: 44)
         barView = JHImagePhotosBar(frame: f2)
+        barView.delegate = self
         view.addSubview(barView)
     }
     var barView: JHImagePhotosBar!
@@ -261,5 +262,17 @@ extension JHImagePhotosVC: JHImagePhotosCellDelegate {
             return true
         }
         return false
+    }
+}
+
+extension JHImagePhotosVC: JHImagePhotosBarDelegate {
+    func barClicked(type: JHImagePhotosBarType) {
+        switch type {
+        case .preview:
+            break
+        case .finished:
+            print(selectedPhotos)
+            break
+        }
     }
 }
