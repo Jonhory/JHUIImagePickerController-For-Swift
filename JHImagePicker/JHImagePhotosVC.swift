@@ -55,10 +55,11 @@ class JHImagePhotosVC: UIViewController {
     var selectedPhotos: [JHPhotoItem] = []
     // 是否已展示蒙版
     var isShowMask = false
+    // 是否第一次进入
+    var isFirstLoad = true
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
         
         scrollToBottom()
     }
@@ -82,7 +83,9 @@ class JHImagePhotosVC: UIViewController {
     }
     
     func scrollToBottom() {
-        if assets.count <= 1 { return }
+        if assets.count <= 1 || !isFirstLoad { return }
+        isFirstLoad = false
+        
         let indexPath = IndexPath(row: assets.count - 1, section: 0)
         collectionView?.scrollToItem(at: indexPath, at: .bottom, animated: false)
         
