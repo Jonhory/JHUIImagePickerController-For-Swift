@@ -1,5 +1,5 @@
 //
-//  JHImageListController.swift
+//  JHImageListVC.swift
 //  EaseImagePickerController
 //
 //  Created by Jonhory on 2017/7/13.
@@ -23,7 +23,7 @@ class JHListtem {
     }
 }
 
-class JHImageListController: UIViewController {
+class JHImageListVC: UIViewController {
 
     var myBlock: JHImagePhotosCompletion?
     var items: [JHListtem] = []
@@ -79,7 +79,7 @@ class JHImageListController: UIViewController {
             let assetsFetchResult = PHAsset.fetchAssets(in: item , options: resultsOptions)
             // 移除 最近删除 和 已隐藏 数据源
             if item.localizedTitle == "最近删除" || item.localizedTitle == "已隐藏" { continue }
-            
+            if assetsFetchResult.count < 1 { continue }
             print("title:",item.localizedTitle ?? "nil", "   result:",assetsFetchResult)
             let jhItem = JHListtem(title: item.localizedTitle, result: assetsFetchResult)
             items.append(jhItem)
@@ -164,7 +164,7 @@ class JHImageListController: UIViewController {
     
 }
 
-extension JHImageListController: UITableViewDataSource, UITableViewDelegate {
+extension JHImageListVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print(items[indexPath.row].title!)

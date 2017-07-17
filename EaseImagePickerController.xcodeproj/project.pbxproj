@@ -13,9 +13,12 @@
 		8908C6981D0D84430004B2E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8908C6971D0D84430004B2E4 /* Assets.xcassets */; };
 		8908C69B1D0D84430004B2E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8908C6991D0D84430004B2E4 /* LaunchScreen.storyboard */; };
 		BBD6D0511F170EC400D50A2C /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD6D0501F170EC400D50A2C /* SelectViewController.swift */; };
+		BBD80FED1F1CA1FE00BC4C19 /* JHImagePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD80FEC1F1CA1FE00BC4C19 /* JHImagePreviewVC.swift */; };
+		BBD80FEF1F1CA40100BC4C19 /* JHImagePreviewNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD80FEE1F1CA40100BC4C19 /* JHImagePreviewNav.swift */; };
+		BBD80FF11F1CA54000BC4C19 /* jh_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD80FF01F1CA54000BC4C19 /* jh_back@2x.png */; };
 		BBDD39041F19B6DA007E47DC /* JHCommon.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBDD39031F19B6DA007E47DC /* JHCommon.swift */; };
 		BBF4A7F91F1C45BE0019EC45 /* JHImageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4A7ED1F1C45BE0019EC45 /* JHImageListCell.swift */; };
-		BBF4A7FA1F1C45BE0019EC45 /* JHImageListController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4A7EE1F1C45BE0019EC45 /* JHImageListController.swift */; };
+		BBF4A7FA1F1C45BE0019EC45 /* JHImageListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4A7EE1F1C45BE0019EC45 /* JHImageListVC.swift */; };
 		BBF4A7FB1F1C45BE0019EC45 /* JHImagePhotosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4A7EF1F1C45BE0019EC45 /* JHImagePhotosCell.swift */; };
 		BBF4A7FC1F1C45BE0019EC45 /* JHImagePhotosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4A7F01F1C45BE0019EC45 /* JHImagePhotosVC.swift */; };
 		BBF4A7FD1F1C45BE0019EC45 /* JHImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4A7F11F1C45BE0019EC45 /* JHImagePicker.swift */; };
@@ -39,9 +42,12 @@
 		BB1A8AA91F18FB0A00BEE6FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
 		BB1A8AAA1F18FB0A00BEE6FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
 		BBD6D0501F170EC400D50A2C /* SelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SelectViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		BBD80FEC1F1CA1FE00BC4C19 /* JHImagePreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePreviewVC.swift; sourceTree = "<group>"; };
+		BBD80FEE1F1CA40100BC4C19 /* JHImagePreviewNav.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePreviewNav.swift; sourceTree = "<group>"; };
+		BBD80FF01F1CA54000BC4C19 /* jh_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jh_back@2x.png"; sourceTree = "<group>"; };
 		BBDD39031F19B6DA007E47DC /* JHCommon.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHCommon.swift; sourceTree = "<group>"; };
 		BBF4A7ED1F1C45BE0019EC45 /* JHImageListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImageListCell.swift; sourceTree = "<group>"; };
-		BBF4A7EE1F1C45BE0019EC45 /* JHImageListController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImageListController.swift; sourceTree = "<group>"; };
+		BBF4A7EE1F1C45BE0019EC45 /* JHImageListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImageListVC.swift; sourceTree = "<group>"; };
 		BBF4A7EF1F1C45BE0019EC45 /* JHImagePhotosCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePhotosCell.swift; sourceTree = "<group>"; };
 		BBF4A7F01F1C45BE0019EC45 /* JHImagePhotosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePhotosVC.swift; sourceTree = "<group>"; };
 		BBF4A7F11F1C45BE0019EC45 /* JHImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePicker.swift; sourceTree = "<group>"; };
@@ -100,13 +106,15 @@
 		BBF4A7EC1F1C45BE0019EC45 /* JHImagePicker */ = {
 			isa = PBXGroup;
 			children = (
-				BBF4A7EE1F1C45BE0019EC45 /* JHImageListController.swift */,
+				BBF4A7F11F1C45BE0019EC45 /* JHImagePicker.swift */,
+				BBF4A7F21F1C45BE0019EC45 /* JHImagePickerTool.swift */,
+				BBF4A7EE1F1C45BE0019EC45 /* JHImageListVC.swift */,
 				BBF4A7ED1F1C45BE0019EC45 /* JHImageListCell.swift */,
 				BBF4A7F01F1C45BE0019EC45 /* JHImagePhotosVC.swift */,
 				BBF4A7EF1F1C45BE0019EC45 /* JHImagePhotosCell.swift */,
 				BBF4A8041F1C48230019EC45 /* JHImagePhotosBar.swift */,
-				BBF4A7F11F1C45BE0019EC45 /* JHImagePicker.swift */,
-				BBF4A7F21F1C45BE0019EC45 /* JHImagePickerTool.swift */,
+				BBD80FEC1F1CA1FE00BC4C19 /* JHImagePreviewVC.swift */,
+				BBD80FEE1F1CA40100BC4C19 /* JHImagePreviewNav.swift */,
 				BBF4A7F31F1C45BE0019EC45 /* JHImages */,
 			);
 			path = JHImagePicker;
@@ -115,6 +123,7 @@
 		BBF4A7F31F1C45BE0019EC45 /* JHImages */ = {
 			isa = PBXGroup;
 			children = (
+				BBD80FF01F1CA54000BC4C19 /* jh_back@2x.png */,
 				BBF4A7F41F1C45BE0019EC45 /* jh_arrow@2x.png */,
 				BBF4A7F51F1C45BE0019EC45 /* jh_select@2x.png */,
 				BBF4A7F61F1C45BE0019EC45 /* jh_select@3x.png */,
@@ -186,6 +195,7 @@
 			files = (
 				BBF4A7FF1F1C45BE0019EC45 /* jh_arrow@2x.png in Resources */,
 				BBF4A8011F1C45BE0019EC45 /* jh_select@3x.png in Resources */,
+				BBD80FF11F1CA54000BC4C19 /* jh_back@2x.png in Resources */,
 				BBF4A8031F1C45BE0019EC45 /* jh_selected@3x.png in Resources */,
 				BBF4A8001F1C45BE0019EC45 /* jh_select@2x.png in Resources */,
 				BBF4A8021F1C45BE0019EC45 /* jh_selected@2x.png in Resources */,
@@ -203,12 +213,14 @@
 			buildActionMask = 2147483647;
 			files = (
 				BBF4A7F91F1C45BE0019EC45 /* JHImageListCell.swift in Sources */,
+				BBD80FEF1F1CA40100BC4C19 /* JHImagePreviewNav.swift in Sources */,
 				BBF4A7FE1F1C45BE0019EC45 /* JHImagePickerTool.swift in Sources */,
 				BBD6D0511F170EC400D50A2C /* SelectViewController.swift in Sources */,
 				BBF4A7FD1F1C45BE0019EC45 /* JHImagePicker.swift in Sources */,
 				8908C6931D0D84430004B2E4 /* ViewController.swift in Sources */,
+				BBD80FED1F1CA1FE00BC4C19 /* JHImagePreviewVC.swift in Sources */,
 				BBF4A7FC1F1C45BE0019EC45 /* JHImagePhotosVC.swift in Sources */,
-				BBF4A7FA1F1C45BE0019EC45 /* JHImageListController.swift in Sources */,
+				BBF4A7FA1F1C45BE0019EC45 /* JHImageListVC.swift in Sources */,
 				BBDD39041F19B6DA007E47DC /* JHCommon.swift in Sources */,
 				BBF4A7FB1F1C45BE0019EC45 /* JHImagePhotosCell.swift in Sources */,
 				8908C6911D0D84430004B2E4 /* AppDelegate.swift in Sources */,

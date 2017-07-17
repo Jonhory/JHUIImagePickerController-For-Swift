@@ -142,6 +142,13 @@ class JHImagePhotosVC: UIViewController {
         return o
     }()
     
+    // 隐藏状态栏
+    override var prefersStatusBarHidden: Bool {
+        get {
+            return false
+        }
+    }
+    
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
         
     }
@@ -159,7 +166,8 @@ class JHImagePhotosVC: UIViewController {
 // MARK: - UICollectionViewDelegate
 extension JHImagePhotosVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        print(indexPath.row)
+        let vc = JHImagePreviewVC()
+        navigationController?.pushViewController(vc, animated: true)
     }
     
 }
