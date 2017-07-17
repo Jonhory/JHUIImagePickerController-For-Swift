@@ -119,9 +119,10 @@ class JHImagePhotosVC: UIViewController {
         
         /// 蒙板
         let f2 = CGRect(x: 0, y: jhSCREEN.height - 44, width: jhSCREEN.width, height: 44)
-        let blurView = JHImagePhotosBar(frame: f2)
-        view.addSubview(blurView)
+        barView = JHImagePhotosBar(frame: f2)
+        view.addSubview(barView)
     }
+    var barView: JHImagePhotosBar!
     
     lazy var imageSize: CGSize = {
         let scale = UIScreen.main.scale
@@ -208,6 +209,8 @@ extension JHImagePhotosVC: JHImagePhotosCellDelegate {
                 collectionView?.reloadItems(at: indexPs)
             }
             
+            barView.handleBarBtn(enable: selectedPhotos.count >= 1, count: selectedPhotos.count)
+            
             return
         }
         if selectedPhotos.count >= maxCount {
@@ -225,6 +228,10 @@ extension JHImagePhotosVC: JHImagePhotosCellDelegate {
             btn.showAnimation()
             selectedPhotos.append(withItem)
         }
+        if selectedPhotos.count >= 1 {
+            barView.handleBarBtn(enable: true, count: selectedPhotos.count)
+        }
+        
         _ = reloadDatas()
     }
     

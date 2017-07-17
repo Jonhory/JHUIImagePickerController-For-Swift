@@ -18,17 +18,19 @@ class JHImagePhotosBar: UIView {
     
     func finishBtnClicked(_ btn: UIButton) {
         print(btn)
-        handleFinishedBtn()
+//        handleFinishedBtn()
     }
     
     func previewBtnClicked( _ btn: UIButton) {
         print("预览会不会")
     }
     
-    func handleFinishedBtn() {
-        finishedBtn.isEnabled = arc4random() % 2 == 0
+    func handleBarBtn(enable: Bool, count: Int) {
+        finishedBtn.isEnabled = enable
+        previewBtn.isEnabled = enable
         if finishedBtn.isEnabled {
             finishedBtn.backgroundColor = enableGreenColor
+            finishedBtn.setTitle("完成(\(count))", for: .normal)
         } else {
             finishedBtn.backgroundColor = disableGreenColor
         }
@@ -46,7 +48,8 @@ class JHImagePhotosBar: UIView {
         finishedBtn.frame = CGRect(x: bounds.width - 73, y: 75/2, width: 60, height: bounds.height - 75)
         finishedBtn.backgroundColor = disableGreenColor
         finishedBtn.setTitle("完成", for: .normal)
-        finishedBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+        finishedBtn.setTitle("完成", for: .disabled)
+        finishedBtn.titleLabel?.font = UIFont.systemFont(ofSize: 13)
         finishedBtn.layer.cornerRadius = 4
         finishedBtn.setTitleColor(rgb(93, 134, 92), for: .disabled)
         finishedBtn.setTitleColor(UIColor.white, for: .normal)
@@ -55,7 +58,7 @@ class JHImagePhotosBar: UIView {
         
         previewBtn.frame = CGRect(x: 0, y: 0, width: 50, height: bounds.height)
         previewBtn.setTitle("预览", for: .normal)
-        previewBtn.titleLabel?.font = UIFont.systemFont(ofSize: 15)
+        previewBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
         previewBtn.setTitleColor(rgb(93, 134, 92), for: .disabled)
         previewBtn.setTitleColor(UIColor.white, for: .normal)
         previewBtn.addTarget(self, action: #selector(previewBtnClicked), for: .touchUpInside)
