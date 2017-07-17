@@ -39,6 +39,7 @@ extension UIViewController {
     
     func jh_presentPhotoVC(_ maxCount: Int, completeHandler: ((_ assets: [PHAsset]) -> Void)? = nil) -> JHImageListController {
         let vc = JHImageListController()
+        vc.listMaxCount = maxCount
         let nav = UINavigationController(rootViewController: vc)
         nav.navigationBar.barStyle = .black
         nav.navigationBar.tintColor = UIColor.white

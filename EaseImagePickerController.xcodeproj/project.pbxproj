@@ -25,6 +25,7 @@
 		BBF4A8011F1C45BE0019EC45 /* jh_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF4A7F61F1C45BE0019EC45 /* jh_select@3x.png */; };
 		BBF4A8021F1C45BE0019EC45 /* jh_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF4A7F71F1C45BE0019EC45 /* jh_selected@2x.png */; };
 		BBF4A8031F1C45BE0019EC45 /* jh_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF4A7F81F1C45BE0019EC45 /* jh_selected@3x.png */; };
+		BBF4A8051F1C48230019EC45 /* JHImagePhotosBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4A8041F1C48230019EC45 /* JHImagePhotosBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -50,6 +51,7 @@
 		BBF4A7F61F1C45BE0019EC45 /* jh_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jh_select@3x.png"; sourceTree = "<group>"; };
 		BBF4A7F71F1C45BE0019EC45 /* jh_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jh_selected@2x.png"; sourceTree = "<group>"; };
 		BBF4A7F81F1C45BE0019EC45 /* jh_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jh_selected@3x.png"; sourceTree = "<group>"; };
+		BBF4A8041F1C48230019EC45 /* JHImagePhotosBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePhotosBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -98,10 +100,11 @@
 		BBF4A7EC1F1C45BE0019EC45 /* JHImagePicker */ = {
 			isa = PBXGroup;
 			children = (
-				BBF4A7ED1F1C45BE0019EC45 /* JHImageListCell.swift */,
 				BBF4A7EE1F1C45BE0019EC45 /* JHImageListController.swift */,
-				BBF4A7EF1F1C45BE0019EC45 /* JHImagePhotosCell.swift */,
+				BBF4A7ED1F1C45BE0019EC45 /* JHImageListCell.swift */,
 				BBF4A7F01F1C45BE0019EC45 /* JHImagePhotosVC.swift */,
+				BBF4A7EF1F1C45BE0019EC45 /* JHImagePhotosCell.swift */,
+				BBF4A8041F1C48230019EC45 /* JHImagePhotosBar.swift */,
 				BBF4A7F11F1C45BE0019EC45 /* JHImagePicker.swift */,
 				BBF4A7F21F1C45BE0019EC45 /* JHImagePickerTool.swift */,
 				BBF4A7F31F1C45BE0019EC45 /* JHImages */,
@@ -209,6 +212,7 @@
 				BBDD39041F19B6DA007E47DC /* JHCommon.swift in Sources */,
 				BBF4A7FB1F1C45BE0019EC45 /* JHImagePhotosCell.swift in Sources */,
 				8908C6911D0D84430004B2E4 /* AppDelegate.swift in Sources */,
+				BBF4A8051F1C48230019EC45 /* JHImagePhotosBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

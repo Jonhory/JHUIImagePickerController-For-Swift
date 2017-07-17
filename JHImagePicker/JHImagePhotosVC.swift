@@ -10,11 +10,23 @@ import UIKit
 import Photos
 
 class JHPhotoItem {
+    // 数据源
     var asset: PHAsset?
-    var isSelected: Bool = false
+    // 是否选中
+    var isSelected = false
+    // 是否显示蒙版
+    var isAble = true
+    
+    // 选中时显示的数字
+    var index: Int = 1
+    var indexP: IndexPath?
     
     init(asset: PHAsset) {
         self.asset = asset
+    }
+    
+    static func ==(lhs: JHPhotoItem, rhs: JHPhotoItem) -> Bool {
+        return lhs.asset == rhs.asset && lhs.index == rhs.index
     }
 }
 
@@ -27,12 +39,16 @@ class JHImagePhotosVC: UIViewController {
         }
     }
     
+    // 最多选择张数
+    public var maxCount: Int = 9
+    
     var collectionView: UICollectionView?
     var assets: PHFetchResult<PHAsset>!
     // 数据源
     var photos: [JHPhotoItem] = []
-    
     var imageManager = PHCachingImageManager()
+    // 已选图片
+    var selectedPhotos: [JHPhotoItem] = []
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
@@ -95,15 +111,8 @@ class JHImagePhotosVC: UIViewController {
         view.addSubview(collectionView!)
         
         /// 蒙板
-        let blurEffect = UIBlurEffect(style: .dark)
-        let blurView = UIVisualEffectView(effect: blurEffect)
         let f2 = CGRect(x: 0, y: jhSCREEN.height - 44, width: jhSCREEN.width, height: 44)
-        blurView.frame = f2
-        
-//        let v = UIView(frame: f2)
-//        v.backgroundColor = UIColor.black
-//        v.alpha = 0.8
-//        view.addSubview(v)
+        let blurView = JHImagePhotosBar(frame: f2)
         view.addSubview(blurView)
     }
     
@@ -133,6 +142,7 @@ class JHImagePhotosVC: UIViewController {
 
 }
 
+// MARK: - UICollectionViewDelegate
 extension JHImagePhotosVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         print(indexPath.row)
@@ -140,6 +150,8 @@ extension JHImagePhotosVC: UICollectionViewDelegate {
     
 }
 
+
+// MARK: - UICollectionViewDataSource
 extension JHImagePhotosVC: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
@@ -150,8 +162,9 @@ extension JHImagePhotosVC: UICollectionViewDataSource {
         let cell: JHImagePhotosCell = collectionView.dequeueReusableCell(withReuseIdentifier: JHImagePhotosCellID, for: indexPath) as! JHImagePhotosCell
         
         let item = photos[indexPath.row]
+        item.indexP = indexPath
         cell.item = item
-        
+        cell.delegate = self
         if let asset = item.asset {
             imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: options, resultHandler: { (image, dic) in
                 cell.iv.image = image
@@ -160,6 +173,48 @@ extension JHImagePhotosVC: UICollectionViewDataSource {
         
         return cell
     }
-    
-    
+}
+
+// MARK: - JHImagePhotosCellDelegate 点击事件
+extension JHImagePhotosVC: JHImagePhotosCellDelegate {
+    func photsCellClicked(withItem: JHPhotoItem, btn: UIButton) {
+        print(withItem.isSelected)
+        if withItem.isSelected {
+            if let index = selectedPhotos.index(where: { $0 == withItem } ) {
+                selectedPhotos.remove(at: index)
+                for i in (withItem.index - 1)..<selectedPhotos.count {
+                    let otherItem = selectedPhotos[i]
+                    otherItem.index -= 1
+                    collectionView?.reloadItems(at: [otherItem.indexP!])
+                }
+            }
+            withItem.isSelected = false
+            btn.isSelected  = false
+            return
+        }
+        if selectedPhotos.count >= maxCount {
+            print("你最多只能选择\(maxCount)张照片")
+            return
+        }
+        if withItem.isSelected == false {
+            withItem.isSelected = true
+            btn.isSelected = true
+            let index = selectedPhotos.count + 1
+            withItem.index = index
+            let str = String.init(format: "%d", index)
+            btn.setTitle(str, for: .selected)
+            btn.showAnimation()
+            selectedPhotos.append(withItem)
+        }
+        if selectedPhotos.count >= maxCount {
+            for photo in photos {
+                if photo.isSelected == false {
+                    photo.isAble = false
+                } else {
+                    photo.isAble = true
+                }
+            }
+            collectionView?.reloadData()
+        }
+    }
 }

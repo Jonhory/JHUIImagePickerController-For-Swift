@@ -29,11 +29,15 @@ class JHImageListController: UIViewController {
     lazy var imageManager = PHCachingImageManager()
     
     var isFirstEnter = true
+    var listMaxCount: Int = 9
+    
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if isFirstEnter {
             let vc = JHImagePhotosVC()
             vc.item = items.first
+            vc.maxCount = listMaxCount
+            print("最多", listMaxCount)
             navigationController?.pushViewController(vc, animated: false)
             isFirstEnter = false
         }
@@ -164,6 +168,7 @@ extension JHImageListController: UITableViewDataSource, UITableViewDelegate {
         print(items[indexPath.row].title!)
         let vc = JHImagePhotosVC()
         vc.item = items[indexPath.row]
+        vc.maxCount = listMaxCount
         navigationController?.pushViewController(vc, animated: true)
     }
     

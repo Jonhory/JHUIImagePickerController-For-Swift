@@ -42,7 +42,7 @@ class ViewController: UIViewController,JHImagePickerDelegate {
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
 //        let vc = SelectViewController()
 //        present(vc, animated: true)
-        _ = jh_presentPhotoVC(1)
+        _ = jh_presentPhotoVC(3)
     }
     
     override func didReceiveMemoryWarning() {
