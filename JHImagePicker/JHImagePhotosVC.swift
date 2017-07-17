@@ -100,9 +100,9 @@ class JHImagePhotosVC: UIViewController {
         let f2 = CGRect(x: 0, y: jhSCREEN.height - 44, width: jhSCREEN.width, height: 44)
         blurView.frame = f2
         
-        let v = UIView(frame: f2)
-        v.backgroundColor = UIColor.black
-        v.alpha = 0.8
+//        let v = UIView(frame: f2)
+//        v.backgroundColor = UIColor.black
+//        v.alpha = 0.8
 //        view.addSubview(v)
         view.addSubview(blurView)
     }
