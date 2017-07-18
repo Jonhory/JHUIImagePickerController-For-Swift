@@ -12,7 +12,24 @@
 		8908C6961D0D84430004B2E4 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8908C6941D0D84430004B2E4 /* Main.storyboard */; };
 		8908C6981D0D84430004B2E4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 8908C6971D0D84430004B2E4 /* Assets.xcassets */; };
 		8908C69B1D0D84430004B2E4 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 8908C6991D0D84430004B2E4 /* LaunchScreen.storyboard */; };
-		8908C6A31D0D846C0004B2E4 /* JHImagePickerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8908C6A21D0D846C0004B2E4 /* JHImagePickerController.swift */; };
+		BB355D7C1F1DA2E000F30C1A /* jh_defaultIV@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB355D7A1F1DA2E000F30C1A /* jh_defaultIV@2x.png */; };
+		BB355D7D1F1DA2E000F30C1A /* jh_defaultIV@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BB355D7B1F1DA2E000F30C1A /* jh_defaultIV@3x.png */; };
+		BBD6D0511F170EC400D50A2C /* SelectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD6D0501F170EC400D50A2C /* SelectViewController.swift */; };
+		BBD80FED1F1CA1FE00BC4C19 /* JHImagePreviewVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD80FEC1F1CA1FE00BC4C19 /* JHImagePreviewVC.swift */; };
+		BBD80FEF1F1CA40100BC4C19 /* JHImagePreviewNav.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBD80FEE1F1CA40100BC4C19 /* JHImagePreviewNav.swift */; };
+		BBD80FF11F1CA54000BC4C19 /* jh_back@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBD80FF01F1CA54000BC4C19 /* jh_back@2x.png */; };
+		BBF4A7F91F1C45BE0019EC45 /* JHImageListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4A7ED1F1C45BE0019EC45 /* JHImageListCell.swift */; };
+		BBF4A7FA1F1C45BE0019EC45 /* JHImageListVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4A7EE1F1C45BE0019EC45 /* JHImageListVC.swift */; };
+		BBF4A7FB1F1C45BE0019EC45 /* JHImagePhotosCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4A7EF1F1C45BE0019EC45 /* JHImagePhotosCell.swift */; };
+		BBF4A7FC1F1C45BE0019EC45 /* JHImagePhotosVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4A7F01F1C45BE0019EC45 /* JHImagePhotosVC.swift */; };
+		BBF4A7FD1F1C45BE0019EC45 /* JHImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4A7F11F1C45BE0019EC45 /* JHImagePicker.swift */; };
+		BBF4A7FE1F1C45BE0019EC45 /* JHImagePickerTool.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4A7F21F1C45BE0019EC45 /* JHImagePickerTool.swift */; };
+		BBF4A7FF1F1C45BE0019EC45 /* jh_arrow@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF4A7F41F1C45BE0019EC45 /* jh_arrow@2x.png */; };
+		BBF4A8001F1C45BE0019EC45 /* jh_select@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF4A7F51F1C45BE0019EC45 /* jh_select@2x.png */; };
+		BBF4A8011F1C45BE0019EC45 /* jh_select@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF4A7F61F1C45BE0019EC45 /* jh_select@3x.png */; };
+		BBF4A8021F1C45BE0019EC45 /* jh_selected@2x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF4A7F71F1C45BE0019EC45 /* jh_selected@2x.png */; };
+		BBF4A8031F1C45BE0019EC45 /* jh_selected@3x.png in Resources */ = {isa = PBXBuildFile; fileRef = BBF4A7F81F1C45BE0019EC45 /* jh_selected@3x.png */; };
+		BBF4A8051F1C48230019EC45 /* JHImagePhotosBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = BBF4A8041F1C48230019EC45 /* JHImagePhotosBar.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -23,7 +40,26 @@
 		8908C6971D0D84430004B2E4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		8908C69A1D0D84430004B2E4 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		8908C69C1D0D84430004B2E4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
-		8908C6A21D0D846C0004B2E4 /* JHImagePickerController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePickerController.swift; sourceTree = "<group>"; };
+		BB1A8AA91F18FB0A00BEE6FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/Main.strings"; sourceTree = "<group>"; };
+		BB1A8AAA1F18FB0A00BEE6FB /* zh-Hans */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = "zh-Hans"; path = "zh-Hans.lproj/LaunchScreen.strings"; sourceTree = "<group>"; };
+		BB355D7A1F1DA2E000F30C1A /* jh_defaultIV@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jh_defaultIV@2x.png"; sourceTree = "<group>"; };
+		BB355D7B1F1DA2E000F30C1A /* jh_defaultIV@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jh_defaultIV@3x.png"; sourceTree = "<group>"; };
+		BBD6D0501F170EC400D50A2C /* SelectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; lineEnding = 0; path = SelectViewController.swift; sourceTree = "<group>"; xcLanguageSpecificationIdentifier = xcode.lang.swift; };
+		BBD80FEC1F1CA1FE00BC4C19 /* JHImagePreviewVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePreviewVC.swift; sourceTree = "<group>"; };
+		BBD80FEE1F1CA40100BC4C19 /* JHImagePreviewNav.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePreviewNav.swift; sourceTree = "<group>"; };
+		BBD80FF01F1CA54000BC4C19 /* jh_back@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jh_back@2x.png"; sourceTree = "<group>"; };
+		BBF4A7ED1F1C45BE0019EC45 /* JHImageListCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImageListCell.swift; sourceTree = "<group>"; };
+		BBF4A7EE1F1C45BE0019EC45 /* JHImageListVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImageListVC.swift; sourceTree = "<group>"; };
+		BBF4A7EF1F1C45BE0019EC45 /* JHImagePhotosCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePhotosCell.swift; sourceTree = "<group>"; };
+		BBF4A7F01F1C45BE0019EC45 /* JHImagePhotosVC.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePhotosVC.swift; sourceTree = "<group>"; };
+		BBF4A7F11F1C45BE0019EC45 /* JHImagePicker.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePicker.swift; sourceTree = "<group>"; };
+		BBF4A7F21F1C45BE0019EC45 /* JHImagePickerTool.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePickerTool.swift; sourceTree = "<group>"; };
+		BBF4A7F41F1C45BE0019EC45 /* jh_arrow@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jh_arrow@2x.png"; sourceTree = "<group>"; };
+		BBF4A7F51F1C45BE0019EC45 /* jh_select@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jh_select@2x.png"; sourceTree = "<group>"; };
+		BBF4A7F61F1C45BE0019EC45 /* jh_select@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jh_select@3x.png"; sourceTree = "<group>"; };
+		BBF4A7F71F1C45BE0019EC45 /* jh_selected@2x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jh_selected@2x.png"; sourceTree = "<group>"; };
+		BBF4A7F81F1C45BE0019EC45 /* jh_selected@3x.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "jh_selected@3x.png"; sourceTree = "<group>"; };
+		BBF4A8041F1C48230019EC45 /* JHImagePhotosBar.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = JHImagePhotosBar.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -40,7 +76,7 @@
 		8908C6841D0D84430004B2E4 = {
 			isa = PBXGroup;
 			children = (
-				8908C6A21D0D846C0004B2E4 /* JHImagePickerController.swift */,
+				BBF4A7EC1F1C45BE0019EC45 /* JHImagePicker */,
 				8908C68F1D0D84430004B2E4 /* EaseImagePickerController */,
 				8908C68E1D0D84430004B2E4 /* Products */,
 			);
@@ -59,12 +95,45 @@
 			children = (
 				8908C6901D0D84430004B2E4 /* AppDelegate.swift */,
 				8908C6921D0D84430004B2E4 /* ViewController.swift */,
+				BBD6D0501F170EC400D50A2C /* SelectViewController.swift */,
 				8908C6941D0D84430004B2E4 /* Main.storyboard */,
 				8908C6971D0D84430004B2E4 /* Assets.xcassets */,
 				8908C6991D0D84430004B2E4 /* LaunchScreen.storyboard */,
 				8908C69C1D0D84430004B2E4 /* Info.plist */,
 			);
 			path = EaseImagePickerController;
+			sourceTree = "<group>";
+		};
+		BBF4A7EC1F1C45BE0019EC45 /* JHImagePicker */ = {
+			isa = PBXGroup;
+			children = (
+				BBF4A7F11F1C45BE0019EC45 /* JHImagePicker.swift */,
+				BBF4A7F21F1C45BE0019EC45 /* JHImagePickerTool.swift */,
+				BBF4A7EE1F1C45BE0019EC45 /* JHImageListVC.swift */,
+				BBF4A7ED1F1C45BE0019EC45 /* JHImageListCell.swift */,
+				BBF4A7F01F1C45BE0019EC45 /* JHImagePhotosVC.swift */,
+				BBF4A7EF1F1C45BE0019EC45 /* JHImagePhotosCell.swift */,
+				BBF4A8041F1C48230019EC45 /* JHImagePhotosBar.swift */,
+				BBD80FEC1F1CA1FE00BC4C19 /* JHImagePreviewVC.swift */,
+				BBD80FEE1F1CA40100BC4C19 /* JHImagePreviewNav.swift */,
+				BBF4A7F31F1C45BE0019EC45 /* JHImages */,
+			);
+			path = JHImagePicker;
+			sourceTree = "<group>";
+		};
+		BBF4A7F31F1C45BE0019EC45 /* JHImages */ = {
+			isa = PBXGroup;
+			children = (
+				BB355D7A1F1DA2E000F30C1A /* jh_defaultIV@2x.png */,
+				BB355D7B1F1DA2E000F30C1A /* jh_defaultIV@3x.png */,
+				BBD80FF01F1CA54000BC4C19 /* jh_back@2x.png */,
+				BBF4A7F41F1C45BE0019EC45 /* jh_arrow@2x.png */,
+				BBF4A7F51F1C45BE0019EC45 /* jh_select@2x.png */,
+				BBF4A7F61F1C45BE0019EC45 /* jh_select@3x.png */,
+				BBF4A7F71F1C45BE0019EC45 /* jh_selected@2x.png */,
+				BBF4A7F81F1C45BE0019EC45 /* jh_selected@3x.png */,
+			);
+			path = JHImages;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -94,10 +163,11 @@
 			isa = PBXProject;
 			attributes = {
 				LastSwiftUpdateCheck = 0730;
-				LastUpgradeCheck = 0730;
+				LastUpgradeCheck = 0830;
 				TargetAttributes = {
 					8908C68C1D0D84430004B2E4 = {
 						CreatedOnToolsVersion = 7.3;
+						DevelopmentTeam = 4EHUQSUYU5;
 						LastSwiftMigration = 0820;
 						ProvisioningStyle = Automatic;
 					};
@@ -126,7 +196,15 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBF4A7FF1F1C45BE0019EC45 /* jh_arrow@2x.png in Resources */,
+				BBF4A8011F1C45BE0019EC45 /* jh_select@3x.png in Resources */,
+				BBD80FF11F1CA54000BC4C19 /* jh_back@2x.png in Resources */,
+				BBF4A8031F1C45BE0019EC45 /* jh_selected@3x.png in Resources */,
+				BBF4A8001F1C45BE0019EC45 /* jh_select@2x.png in Resources */,
+				BB355D7C1F1DA2E000F30C1A /* jh_defaultIV@2x.png in Resources */,
+				BBF4A8021F1C45BE0019EC45 /* jh_selected@2x.png in Resources */,
 				8908C69B1D0D84430004B2E4 /* LaunchScreen.storyboard in Resources */,
+				BB355D7D1F1DA2E000F30C1A /* jh_defaultIV@3x.png in Resources */,
 				8908C6981D0D84430004B2E4 /* Assets.xcassets in Resources */,
 				8908C6961D0D84430004B2E4 /* Main.storyboard in Resources */,
 			);
@@ -139,9 +217,18 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				BBF4A7F91F1C45BE0019EC45 /* JHImageListCell.swift in Sources */,
+				BBD80FEF1F1CA40100BC4C19 /* JHImagePreviewNav.swift in Sources */,
+				BBF4A7FE1F1C45BE0019EC45 /* JHImagePickerTool.swift in Sources */,
+				BBD6D0511F170EC400D50A2C /* SelectViewController.swift in Sources */,
+				BBF4A7FD1F1C45BE0019EC45 /* JHImagePicker.swift in Sources */,
 				8908C6931D0D84430004B2E4 /* ViewController.swift in Sources */,
-				8908C6A31D0D846C0004B2E4 /* JHImagePickerController.swift in Sources */,
+				BBD80FED1F1CA1FE00BC4C19 /* JHImagePreviewVC.swift in Sources */,
+				BBF4A7FC1F1C45BE0019EC45 /* JHImagePhotosVC.swift in Sources */,
+				BBF4A7FA1F1C45BE0019EC45 /* JHImageListVC.swift in Sources */,
+				BBF4A7FB1F1C45BE0019EC45 /* JHImagePhotosCell.swift in Sources */,
 				8908C6911D0D84430004B2E4 /* AppDelegate.swift in Sources */,
+				BBF4A8051F1C48230019EC45 /* JHImagePhotosBar.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -152,6 +239,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				8908C6951D0D84430004B2E4 /* Base */,
+				BB1A8AA91F18FB0A00BEE6FB /* zh-Hans */,
 			);
 			name = Main.storyboard;
 			sourceTree = "<group>";
@@ -160,6 +248,7 @@
 			isa = PBXVariantGroup;
 			children = (
 				8908C69A1D0D84430004B2E4 /* Base */,
+				BB1A8AAA1F18FB0A00BEE6FB /* zh-Hans */,
 			);
 			name = LaunchScreen.storyboard;
 			sourceTree = "<group>";
@@ -171,6 +260,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -181,8 +271,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -217,6 +309,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_LOCALIZABILITY_NONLOCALIZED = YES;
 				CLANG_ANALYZER_NONNULL = YES;
 				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
 				CLANG_CXX_LIBRARY = "libc++";
@@ -227,8 +320,10 @@
 				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
 				CLANG_WARN_EMPTY_BODY = YES;
 				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
 				CLANG_WARN_INT_CONVERSION = YES;
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
@@ -247,6 +342,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 9.3;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
+				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
 			};
@@ -257,7 +353,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4EHUQSUYU5;
 				INFOPLIST_FILE = EaseImagePickerController/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -272,7 +368,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
-				DEVELOPMENT_TEAM = "";
+				DEVELOPMENT_TEAM = 4EHUQSUYU5;
 				INFOPLIST_FILE = EaseImagePickerController/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
