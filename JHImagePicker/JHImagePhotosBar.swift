@@ -35,7 +35,7 @@ class JHImagePhotosBar: UIView {
     
     func handleBarBtn(enable: Bool, count: Int) {
         finishedBtn.isEnabled = enable
-        previewBtn.isEnabled = enable
+//        previewBtn.isEnabled = enable
         if finishedBtn.isEnabled {
             finishedBtn.backgroundColor = enableGreenColor
             finishedBtn.setTitle("完成(\(count))", for: .normal)
@@ -66,21 +66,21 @@ class JHImagePhotosBar: UIView {
         finishedBtn.isEnabled = false
         addSubview(finishedBtn)
         
-        previewBtn.frame = CGRect(x: 0, y: 0, width: 50, height: bounds.height)
-        previewBtn.setTitle("预览", for: .normal)
-        previewBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
-        previewBtn.setTitleColor(rgb(93, 134, 92), for: .disabled)
-        previewBtn.setTitleColor(UIColor.white, for: .normal)
-        previewBtn.addTarget(self, action: #selector(btnC(_:)), for: .touchUpInside)
-        previewBtn.tag = JHImagePhotosBarType.preview.rawValue
-        previewBtn.isEnabled = false
-        addSubview(previewBtn)
+//        previewBtn.frame = CGRect(x: 0, y: 0, width: 50, height: bounds.height)
+//        previewBtn.setTitle("预览", for: .normal)
+//        previewBtn.titleLabel?.font = UIFont.systemFont(ofSize: 14)
+//        previewBtn.setTitleColor(rgb(93, 134, 92), for: .disabled)
+//        previewBtn.setTitleColor(UIColor.white, for: .normal)
+//        previewBtn.addTarget(self, action: #selector(btnC(_:)), for: .touchUpInside)
+//        previewBtn.tag = JHImagePhotosBarType.preview.rawValue
+//        previewBtn.isEnabled = false
+//        addSubview(previewBtn)
     }
     
     let disableGreenColor = rgb(23, 82, 22)
     let enableGreenColor = rgb(26, 173, 25)
     let finishedBtn = UIButton(type: .custom)
-    let previewBtn = UIButton(type: .custom)
+//    let previewBtn = UIButton(type: .custom)
     
     required init?(coder aDecoder: NSCoder) {
         fatalError("init(coder:) has not been implemented")

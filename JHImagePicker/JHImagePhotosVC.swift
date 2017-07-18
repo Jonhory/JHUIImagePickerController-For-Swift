@@ -166,8 +166,8 @@ class JHImagePhotosVC: UIViewController {
 // MARK: - UICollectionViewDelegate
 extension JHImagePhotosVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let vc = JHImagePreviewVC()
-        navigationController?.pushViewController(vc, animated: true)
+//        let vc = JHImagePreviewVC()
+//        navigationController?.pushViewController(vc, animated: true)
     }
     
 }

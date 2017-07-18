@@ -12,6 +12,15 @@ import Photos
 
 let jhSCREEN = UIScreen.main.bounds.size
 
+//MARK: - 常用方法
+func rgb(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat) -> UIColor {
+    return rgba(r, g, b, 1.0)
+}
+
+func rgba(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat, _ a:CGFloat) -> UIColor {
+    return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a)
+}
+
 /// 校验相机权限
 ///
 /// - Parameter status: 相册权限

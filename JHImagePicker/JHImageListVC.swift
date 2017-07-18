@@ -79,7 +79,7 @@ class JHImageListVC: UIViewController {
             let assetsFetchResult = PHAsset.fetchAssets(in: item , options: resultsOptions)
             // 移除 最近删除 和 已隐藏 数据源
             if item.localizedTitle == "最近删除" || item.localizedTitle == "已隐藏" { continue }
-            if assetsFetchResult.count < 1 { continue }
+//            if assetsFetchResult.count < 1 { continue }
             print("title:",item.localizedTitle ?? "nil", "   result:",assetsFetchResult)
             let jhItem = JHListtem(title: item.localizedTitle, result: assetsFetchResult)
             items.append(jhItem)
@@ -182,7 +182,7 @@ extension JHImageListVC: UITableViewDataSource, UITableViewDelegate {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = JHImageListCell.configWith(table: tableView)
         cell.item = items[indexPath.row]
-        if let asset = items[indexPath.row].result.firstObject {
+        if let asset = items[indexPath.row].result.lastObject {
             imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: options, resultHandler: { (image, dic) in
                 cell.iconIV.image = image
             })
