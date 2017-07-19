@@ -16,11 +16,14 @@ class JHPhotoItem {
     var isSelected = false
     // 是否显示蒙版
     var isAble = true
+    // 是否展示动画
+    var isNeedAnimated = false
     
     // 选中时显示的数字
     var index: Int = 1
     var indexP: IndexPath?
     var image: UIImage?
+    
     
     init(asset: PHAsset) {
         self.asset = asset
@@ -72,7 +75,6 @@ class JHImagePhotosVC: UIViewController {
         view.backgroundColor = UIColor.black
         setRightBtn()
         handleDatasource()
-        print(assets)
         loadCollectionView()
     }
     
@@ -205,7 +207,7 @@ extension JHImagePhotosVC: UICollectionViewDataSource {
 // MARK: - JHImagePhotosCellDelegate 点击事件
 extension JHImagePhotosVC: JHImagePhotosCellDelegate {
     func photsCellClicked(withItem: JHPhotoItem, btn: UIButton) {
-        print(withItem.isSelected)
+        
         if withItem.isSelected {
             var indexPs: [IndexPath] = []
             if let index = selectedPhotos.index(where: { $0 == withItem } ) {
@@ -228,7 +230,7 @@ extension JHImagePhotosVC: JHImagePhotosCellDelegate {
             return
         }
         if selectedPhotos.count >= maxCount {
-            print("你最多只能选择\(maxCount)张照片")
+            showMaxCountAlert()
             return
         }
         
@@ -239,14 +241,26 @@ extension JHImagePhotosVC: JHImagePhotosCellDelegate {
             withItem.index = index
             let str = String.init(format: "%d", index)
             btn.setTitle(str, for: .selected)
-            btn.showAnimation()
             selectedPhotos.append(withItem)
+            if selectedPhotos.count >= maxCount {
+                withItem.isNeedAnimated = true
+            } else {
+                btn.showAnimation()
+            }
         }
         if selectedPhotos.count >= 1 {
             barView.handleBarBtn(enable: true, count: selectedPhotos.count)
         }
         
         _ = reloadDatas()
+    }
+    
+    func showMaxCountAlert() {
+        let title = "你最多只能选择\(maxCount)张照片"
+        let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
+        let sure = UIAlertAction(title: "我知道了", style: .default)
+        alert.addAction(sure)
+        present(alert, animated: true)
     }
     
     func reloadDatas() -> Bool {
@@ -281,7 +295,6 @@ extension JHImagePhotosVC: JHImagePhotosBarDelegate {
         case .preview:
             break
         case .finished:
-            print(selectedPhotos)
             dismiss(animated: true, completion: nil)
             if block != nil {
                 block!(selectedPhotos)

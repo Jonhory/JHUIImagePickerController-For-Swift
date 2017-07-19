@@ -26,6 +26,10 @@ class JHImagePhotosCell: UICollectionViewCell {
             selectBtn.isSelected = item!.isSelected
             selectBtn.setTitle("\(item!.index)", for: .selected)
             maskV.isHidden = item!.isAble
+            if item!.isNeedAnimated {
+                selectBtn.showAnimation()
+                item!.isNeedAnimated = false
+            }
         }
     }
     

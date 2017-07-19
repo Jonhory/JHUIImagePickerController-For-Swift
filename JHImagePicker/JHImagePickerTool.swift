@@ -65,8 +65,6 @@ extension UIViewController {
 extension UIView {
     func showAnimation(_ duration: TimeInterval = 0.6, _ maxScale: CGFloat = 1.1, _ minScale: CGFloat = 0.9) {
         
-        print("😯😯😯😯😯😯😯😯😯😯😯😯😯😯")
-        
         UIView.animateKeyframes(withDuration: duration, delay: 0, options: .allowUserInteraction, animations: { 
             UIView.addKeyframe(withRelativeStartTime: 0, relativeDuration: duration/3, animations: {
                 self.transform = CGAffineTransform(scaleX: maxScale, y: maxScale)
