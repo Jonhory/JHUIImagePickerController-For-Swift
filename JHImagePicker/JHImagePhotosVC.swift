@@ -32,6 +32,15 @@ class JHPhotoItem {
     static func ==(lhs: JHPhotoItem, rhs: JHPhotoItem) -> Bool {
         return lhs.asset == rhs.asset && lhs.index == rhs.index
     }
+    
+    // 获取原图
+    func originalImage(_ finished: @escaping (_ origin: UIImage) -> Void) {
+        if let ass = self.asset {
+            getOriginalImage(ass, finished: { (image) in
+                finished(image)
+            })
+        }
+    }
 }
 
 typealias JHImagePhotosCompletion = (_ images: [JHPhotoItem]) -> Void
@@ -191,6 +200,7 @@ extension JHImagePhotosVC: UICollectionViewDataSource {
         cell.delegate = self
         if let asset = item.asset {
             if item.image == nil {
+                
                 imageManager.requestImage(for: asset, targetSize: imageSize, contentMode: .aspectFill, options: options, resultHandler: { (image, dic) in
                     cell.iv.image = image
                     item.image = image

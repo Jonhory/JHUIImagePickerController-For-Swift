@@ -21,6 +21,26 @@ func rgba(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat, _ a:CGFloat) -> UIColor {
     return UIColor(red: r/255.0, green: g/255.0, blue: b/255.0, alpha: a)
 }
 
+
+/// 获取原图数据
+///
+/// - Parameters:
+///   - asset: 图片资源
+///   - finished: 图片回调
+func getOriginalImage(_ asset: PHAsset, finished: @escaping ((_ originalImage: UIImage) -> Void )) {
+    let manager = PHCachingImageManager()
+    let size = CGSize(width: asset.pixelWidth, height: asset.pixelHeight)
+    
+    let options = PHImageRequestOptions()
+    options.isSynchronous = true
+    
+    manager.requestImage(for: asset, targetSize: size, contentMode: .default, options: options) { (image, dict) in
+        if (image != nil) {
+            finished(image!)
+        }
+    }
+}
+
 /// 校验相机权限
 ///
 /// - Parameter status: 相册权限

@@ -32,7 +32,7 @@ class SelectViewController: UIViewController, JHImagePickerDelegate {
         //设置选择图片后回调的代理协议
         imagePicker?.delegate = self
         //设置是否使用裁剪模式,默认为true
-        //        imagePicker?.isEditImage = false
+        imagePicker?.isEditImage = false
         
         imageView = UIImageView(frame: CGRect(x: 10, y: 100, width: jhSCREEN.width - 20, height: jhSCREEN.height - 280))
         imageView.backgroundColor = UIColor.lightGray
@@ -59,8 +59,8 @@ class SelectViewController: UIViewController, JHImagePickerDelegate {
     
     //选取图片
     func selectImageClicked() {
-        let alert = UIAlertController(title: "", message: "Choose the photo you like", preferredStyle: .alert)
-        let cameraAction = UIAlertAction(title: "From camera roll", style: .default) { (action) in
+        let alert = UIAlertController(title: "", message: "选取图片", preferredStyle: .alert)
+        let cameraAction = UIAlertAction(title: "拍摄", style: .default) { (action) in
             //图片来自相机闭包 注意使用[weak self] 防止强引用
             self.imagePicker?.selectImageFromCameraSuccess({[weak self](imagePickerController) in
                 if let strongSelf = self {
@@ -70,12 +70,21 @@ class SelectViewController: UIViewController, JHImagePickerDelegate {
                     //SVProgressHUD.showErrorWithStatus("无法获取相机权限")
             })
         }
-        let photoAction = UIAlertAction(title: "Pictures", style: .default) { (action) in
-            _ = self.jh_presentPhotoVC(1, completeHandler: { items in
+        let photoAction = UIAlertAction(title: "从手机相册选择", style: .default) { (action) in
+            _ = self.jh_presentPhotoVC(3, completeHandler: { items in
                 print("当前选中的图片数组", items)
+                if let first = items.first {
+                    print("获取回调图片：",first.image!)
+                    
+                    first.originalImage({ (image) in
+                        self.imageView.image = image
+                        print("获取原图：",image)
+                    })
+                    
+                }
             })
         }
-        let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
+        let cancelAction = UIAlertAction(title: "取消", style: .default, handler: nil)
         alert.addAction(cameraAction)
         alert.addAction(photoAction)
         alert.addAction(cancelAction)
@@ -112,7 +121,7 @@ class SelectViewController: UIViewController, JHImagePickerDelegate {
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
-        dismiss(animated: true)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -120,4 +129,7 @@ class SelectViewController: UIViewController, JHImagePickerDelegate {
         // Dispose of any resources that can be recreated.
     }
 
+    deinit {
+        print("dealloc :",self)
+    }
 }
