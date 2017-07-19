@@ -34,7 +34,7 @@ class JHImageListVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        if isFirstEnter {
+        if isFirstEnter && isEnablePhoto {
             let vc = JHImagePhotosVC()
             vc.item = items.first
             vc.maxCount = listMaxCount
@@ -45,13 +45,14 @@ class JHImageListVC: UIViewController {
         }
         
     }
+    
+    let isEnablePhoto = authorize()
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
         
         setRightBtn()
         
-        let isEnablePhoto = authorize()
         if isEnablePhoto {
             title = "照片"
             loadImageDatas()
