@@ -39,7 +39,7 @@ class JHImageListVC: UIViewController {
             vc.item = items.first
             vc.maxCount = listMaxCount
             vc.block = myBlock
-            print("最多", listMaxCount)
+            
             navigationController?.pushViewController(vc, animated: false)
             isFirstEnter = false
         }
@@ -53,7 +53,6 @@ class JHImageListVC: UIViewController {
         
         let isEnablePhoto = authorize()
         if isEnablePhoto {
-            print("我可是有权限哦")
             title = "照片"
             loadImageDatas()
             loadTableView()
@@ -79,8 +78,8 @@ class JHImageListVC: UIViewController {
             let assetsFetchResult = PHAsset.fetchAssets(in: item , options: resultsOptions)
             // 移除 最近删除 和 已隐藏 数据源
             if item.localizedTitle == "最近删除" || item.localizedTitle == "已隐藏" { continue }
-//            if assetsFetchResult.count < 1 { continue }
-            print("title:",item.localizedTitle ?? "nil", "   result:",assetsFetchResult)
+            if assetsFetchResult.count < 1 { continue }
+            
             let jhItem = JHListtem(title: item.localizedTitle, result: assetsFetchResult)
             items.append(jhItem)
         }
@@ -167,7 +166,7 @@ class JHImageListVC: UIViewController {
 extension JHImageListVC: UITableViewDataSource, UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print(items[indexPath.row].title!)
+        
         let vc = JHImagePhotosVC()
         vc.item = items[indexPath.row]
         vc.maxCount = listMaxCount

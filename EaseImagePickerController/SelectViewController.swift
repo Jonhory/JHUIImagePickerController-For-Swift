@@ -72,7 +72,7 @@ class SelectViewController: UIViewController, JHImagePickerDelegate {
         }
         let photoAction = UIAlertAction(title: "Pictures", style: .default) { (action) in
             _ = self.jh_presentPhotoVC(1, completeHandler: { items in
-                print(items)
+                print("当前选中的图片数组", items)
             })
         }
         let cancelAction = UIAlertAction(title: "Cancel", style: .default, handler: nil)
