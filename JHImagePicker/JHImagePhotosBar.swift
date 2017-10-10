@@ -27,7 +27,7 @@ class JHImagePhotosBar: UIView {
         backgroundColor = rgb(39, 46, 51)
     }
     
-    func btnC(_ btn: UIButton) {
+    @objc func btnC(_ btn: UIButton) {
         if let type = JHImagePhotosBarType(rawValue: btn.tag) {
             delegate?.barClicked(type: type)
         }

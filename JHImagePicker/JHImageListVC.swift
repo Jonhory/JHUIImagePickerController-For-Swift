@@ -104,7 +104,7 @@ class JHImageListVC: UIViewController {
     }
     
     // MARK: - UI事件
-    func cancelClicked() {
+    @objc func cancelClicked() {
         dismiss(animated: true)
     }
     

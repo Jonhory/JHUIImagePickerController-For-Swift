@@ -84,8 +84,8 @@ class JHImagePicker: NSObject,UIImagePickerControllerDelegate,UINavigationContro
     }
     
     //MARK:从相机拍摄图片
-    func selectImageFromCameraSuccess(_ closure:@escaping cameraSuccess,Fail failClosure:((Void) -> Void)? = nil){
-        let authStatus = AVCaptureDevice.authorizationStatus(forMediaType: AVMediaTypeVideo)
+    func selectImageFromCameraSuccess(_ closure:@escaping cameraSuccess,Fail failClosure:(() -> Void)? = nil){
+        let authStatus = AVCaptureDevice.authorizationStatus(for: AVMediaType.video)
         if authStatus == .restricted || authStatus == .denied{
             if failClosure != nil {
                 failClosure!()

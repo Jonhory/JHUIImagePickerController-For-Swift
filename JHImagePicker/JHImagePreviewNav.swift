@@ -26,7 +26,7 @@ class JHImagePreviewNav: UIView {
         self.init(frame: .zero)
     }
     
-    func backC() {
+    @objc func backC() {
         delegate?.back()
     }
     

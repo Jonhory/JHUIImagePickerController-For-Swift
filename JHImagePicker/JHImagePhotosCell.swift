@@ -33,7 +33,7 @@ class JHImagePhotosCell: UICollectionViewCell {
         }
     }
     
-    func selectBtnClick(_ btn: UIButton) {
+    @objc func selectBtnClick(_ btn: UIButton) {
         if item != nil {
             delegate?.photsCellClicked(withItem: item!, btn: btn)
         }

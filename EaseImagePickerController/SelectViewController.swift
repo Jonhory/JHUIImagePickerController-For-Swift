@@ -58,7 +58,7 @@ class SelectViewController: UIViewController, JHImagePickerDelegate {
     }
     
     //选取图片
-    func selectImageClicked() {
+    @objc func selectImageClicked() {
         let alert = UIAlertController(title: "", message: "选取图片", preferredStyle: .alert)
         let cameraAction = UIAlertAction(title: "拍摄", style: .default) { (action) in
             //图片来自相机闭包 注意使用[weak self] 防止强引用
@@ -92,12 +92,12 @@ class SelectViewController: UIViewController, JHImagePickerDelegate {
     }
     
     //根据identifier读取缓存图片
-    func readImageClicked() {
+    @objc func readImageClicked() {
         let image = self.imagePicker?.readImageFromCaches("abc")
         imageView.image = image
     }
     
-    func deleteImageClicked(){
+    @objc func deleteImageClicked(){
         //删除指定identifier的缓存图片
         //        self.imagePickerController?.removeCachesPictureForIdentifier("abc")
         //删除全部缓存图片
