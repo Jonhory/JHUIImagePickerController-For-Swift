@@ -11,6 +11,17 @@ import UIKit
 import Photos
 
 let jhSCREEN = UIScreen.main.bounds.size
+let JHSCREEN_W = jhSCREEN.width
+let JHSCREEN_H = jhSCREEN.height
+
+func iPhoneX() -> Bool {
+    return (JHSCREEN_W == 375.0 && JHSCREEN_H == 812.0)
+}
+
+/// 34 / 0
+func TabbarSafeBottomMargin() -> CGFloat {
+    return iPhoneX() ? 34.0 : 0.0
+}
 
 //MARK: - 常用方法
 func rgb(_ r:CGFloat, _ g:CGFloat, _ b:CGFloat) -> UIColor {

@@ -8,11 +8,6 @@
 
 import UIKit
 
-let JHSCREEN = UIScreen.main.bounds.size
-let JHSCREEN_W = JHSCREEN.width
-let JHSCREEN_H = JHSCREEN.height
-
-
 enum JHImagePhotosBarType: Int {
     case preview = 256
     case finished
@@ -20,15 +15,6 @@ enum JHImagePhotosBarType: Int {
 
 protocol JHImagePhotosBarDelegate: class {
     func barClicked(type: JHImagePhotosBarType)
-}
-
-func iPhoneX() -> Bool {
-    return (JHSCREEN_W == 375.0 && JHSCREEN_H == 812.0)
-}
-
-/// 34 / 0
-func TabbarSafeBottomMargin() -> CGFloat {
-    return iPhoneX() ? 34.0 : 0.0
 }
 
 class JHImagePhotosBar: UIView {
