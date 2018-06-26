@@ -8,7 +8,7 @@
 
 import UIKit
 
-let JHCellHeight: CGFloat = 57
+let JHCellHeight: CGFloat = 67
 
 private let JHImageListCellID = "JHImageListCellID"
 

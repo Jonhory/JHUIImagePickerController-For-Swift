@@ -8,6 +8,11 @@
 
 import UIKit
 
+let JHSCREEN = UIScreen.main.bounds.size
+let JHSCREEN_W = JHSCREEN.width
+let JHSCREEN_H = JHSCREEN.height
+
+
 enum JHImagePhotosBarType: Int {
     case preview = 256
     case finished
@@ -15,6 +20,15 @@ enum JHImagePhotosBarType: Int {
 
 protocol JHImagePhotosBarDelegate: class {
     func barClicked(type: JHImagePhotosBarType)
+}
+
+func iPhoneX() -> Bool {
+    return (JHSCREEN_W == 375.0 && JHSCREEN_H == 812.0)
+}
+
+/// 34 / 0
+func TabbarSafeBottomMargin() -> CGFloat {
+    return iPhoneX() ? 34.0 : 0.0
 }
 
 class JHImagePhotosBar: UIView {
@@ -53,7 +67,7 @@ class JHImagePhotosBar: UIView {
         addSubview(topLine)
         addSubview(topLine2)
         
-        finishedBtn.frame = CGRect(x: bounds.width - 73, y: 75/2, width: 60, height: bounds.height - 75)
+        finishedBtn.frame = CGRect(x: bounds.width - 73, y: 6.5, width: 60, height: 31)
         finishedBtn.backgroundColor = disableGreenColor
         finishedBtn.setTitle("完成", for: .normal)
         finishedBtn.setTitle("完成", for: .disabled)

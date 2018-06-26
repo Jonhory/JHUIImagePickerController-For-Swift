@@ -75,8 +75,12 @@ class JHImagePhotosVC: UIViewController {
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
-        
+        navigationController?.setNavigationBarHidden(false, animated: animated)
         scrollToBottom()
+    }
+    
+    override func viewWillDisappear(_ animated: Bool) {
+        super.viewWillDisappear(animated)
     }
     
     override func viewDidLoad() {
@@ -123,7 +127,7 @@ class JHImagePhotosVC: UIViewController {
         layout.minimumLineSpacing = 4
         layout.minimumInteritemSpacing = 4
         
-        let f = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height - 44)
+        let f = CGRect(x: 0, y: 0, width: view.bounds.width, height: view.bounds.height - 44 - TabbarSafeBottomMargin())
         collectionView = UICollectionView(frame: f, collectionViewLayout: layout)
         collectionView?.delegate = self
         collectionView?.dataSource = self
@@ -134,7 +138,7 @@ class JHImagePhotosVC: UIViewController {
         view.addSubview(collectionView!)
         
         /// 蒙板
-        let f2 = CGRect(x: 0, y: jhSCREEN.height - 44, width: jhSCREEN.width, height: 44)
+        let f2 = CGRect(x: 0, y: jhSCREEN.height - 44 - TabbarSafeBottomMargin(), width: jhSCREEN.width, height: 44+TabbarSafeBottomMargin())
         barView = JHImagePhotosBar(frame: f2)
         barView.delegate = self
         view.addSubview(barView)
@@ -177,8 +181,7 @@ class JHImagePhotosVC: UIViewController {
 // MARK: - UICollectionViewDelegate
 extension JHImagePhotosVC: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-//        let vc = JHImagePreviewVC()
-//        navigationController?.pushViewController(vc, animated: true)
+        print(indexPath.row)
     }
     
 }

@@ -78,9 +78,13 @@ class JHImageListVC: UIViewController {
             let item = collection[i]
             let assetsFetchResult = PHAsset.fetchAssets(in: item , options: resultsOptions)
             // 移除 最近删除 和 已隐藏 数据源
-            if item.localizedTitle == "最近删除" || item.localizedTitle == "已隐藏" { continue }
+            if item.localizedTitle == "最近删除" || item.localizedTitle == "已隐藏" || item.localizedTitle == "Recently Deleted" {
+                continue
+            }
             // 移除 图片为空的相册
-//            if assetsFetchResult.count < 1 { continue }
+            if assetsFetchResult.count < 1 {
+                continue
+            }
             
             let jhItem = JHListtem(title: item.localizedTitle, result: assetsFetchResult)
             items.append(jhItem)
