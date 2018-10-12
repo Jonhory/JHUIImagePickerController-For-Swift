@@ -269,7 +269,7 @@ extension JHImagePhotosVC: JHImagePhotosCellDelegate {
     }
     
     func showMaxCountAlert() {
-        let title = "你最多只能选择\(maxCount)张照片"
+        let title = "最多只能选择\(maxCount)张照片"
         let alert = UIAlertController(title: title, message: nil, preferredStyle: .alert)
         let sure = UIAlertAction(title: "我知道了", style: .default)
         alert.addAction(sure)

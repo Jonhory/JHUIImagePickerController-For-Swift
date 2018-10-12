@@ -10,6 +10,7 @@ import UIKit
 import Photos
 
 class JHListtem {
+    
     var title: String?
     var result: PHFetchResult<PHAsset>
     
@@ -24,7 +25,7 @@ class JHListtem {
 }
 
 class JHImageListVC: UIViewController {
-
+    
     var myBlock: JHImagePhotosCompletion?
     var items: [JHListtem] = []
     lazy var imageManager = PHCachingImageManager()
@@ -35,18 +36,14 @@ class JHImageListVC: UIViewController {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         if isFirstEnter && isEnablePhoto {
-            let vc = JHImagePhotosVC()
-            vc.item = items.first
-            vc.maxCount = listMaxCount
-            vc.block = myBlock
-            
-            navigationController?.pushViewController(vc, animated: false)
-            isFirstEnter = false
+            goPhotosVC()
         }
         
     }
     
     let isEnablePhoto = authorize()
+    private var unableLable: UILabel?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = UIColor.white
@@ -60,6 +57,25 @@ class JHImageListVC: UIViewController {
         } else {
             showUnablePhoto()
         }
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(refreshUI), name: NOTI_jhPHAuthorized, object: nil)
+    }
+    
+    func goPhotosVC() {
+        let vc = JHImagePhotosVC()
+        vc.item = items.first
+        vc.maxCount = listMaxCount
+        vc.block = myBlock
+        
+        navigationController?.pushViewController(vc, animated: false)
+        isFirstEnter = false
+    }
+    
+    @objc func refreshUI() {
+        unableLable?.isHidden = true
+        loadImageDatas()
+        loadTableView()
+        goPhotosVC()
     }
     
     // MARK: - 逻辑处理
@@ -109,6 +125,7 @@ class JHImageListVC: UIViewController {
     
     // MARK: - UI事件
     @objc func cancelClicked() {
+        NotificationCenter.default.removeObserver(self)
         dismiss(animated: true)
     }
     
@@ -116,7 +133,7 @@ class JHImageListVC: UIViewController {
     private func setRightBtn() {
         navigationItem.rightBarButtonItem = UIBarButtonItem(title: "取消", style: .plain, target: self, action: #selector(cancelClicked))
     }
-
+    
     private func showUnablePhoto() {
         let label = UILabel()
         label.text = "请在iPhone的“设置-隐私-照片”选项中，允许本应用访问你的手机相册。"
@@ -127,6 +144,7 @@ class JHImageListVC: UIViewController {
         label.font = UIFont.systemFont(ofSize: 14)
         label.sizeToFit()
         view.addSubview(label)
+        unableLable = label
     }
     
     private func loadTableView() {

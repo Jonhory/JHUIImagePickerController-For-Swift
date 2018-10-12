@@ -13,6 +13,7 @@ import Photos
 let jhSCREEN = UIScreen.main.bounds.size
 let JHSCREEN_W = jhSCREEN.width
 let JHSCREEN_H = jhSCREEN.height
+let NOTI_jhPHAuthorized = Notification.Name(rawValue: "jhPHAuthorized")
 
 func iPhoneX() -> Bool {
     return (JHSCREEN_W == 375.0 && JHSCREEN_H == 812.0)
@@ -68,7 +69,7 @@ func authorize(_ status: PHAuthorizationStatus = PHPhotoLibrary.authorizationSta
         case .notDetermined:
             PHPhotoLibrary.requestAuthorization({ (s) in
                 DispatchQueue.main.async {
-                    _ = authorize(s)
+                    NotificationCenter.default.post(name: NOTI_jhPHAuthorized, object: nil)
                 }
             })
         default:

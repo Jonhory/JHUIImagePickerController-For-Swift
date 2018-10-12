@@ -121,6 +121,7 @@ class JHImagePicker: NSObject,UIImagePickerControllerDelegate,UINavigationContro
                 self.delegate?.selectImageFinished?(image!)
             }
         }
+        picker.dismiss(animated: true, completion: nil)
     }
     
     //MARK:读取缓存的图片

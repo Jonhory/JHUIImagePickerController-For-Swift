@@ -63,9 +63,9 @@ class SelectViewController: UIViewController, JHImagePickerDelegate {
         let cameraAction = UIAlertAction(title: "拍摄", style: .default) { (action) in
             //图片来自相机闭包 注意使用[weak self] 防止强引用
             self.imagePicker?.selectImageFromCameraSuccess({[weak self](imagePickerController) in
-                if let strongSelf = self {
-                    strongSelf.present(imagePickerController, animated: true, completion: nil)
-                }
+                    if let strongSelf = self {
+                        strongSelf.present(imagePickerController, animated: true, completion: nil)
+                    }
                 }, Fail: {
                     //SVProgressHUD.showErrorWithStatus("无法获取相机权限")
             })
@@ -111,13 +111,12 @@ class SelectViewController: UIViewController, JHImagePickerDelegate {
     //当设置了缓存，且输入缓存identifier时返回该方法
     func selectImageFinishedAndCaches(_ image: UIImage, cachesIdentifier: String, isCachesSuccess: Bool) {
         imageView.image = image
-        self.dismiss(animated: true, completion: nil)
     }
     
     //当未设置缓存或缓存identifier为空时返回该方法
     func selectImageFinished(_ image: UIImage) {
+        print("当未设置缓存或缓存identifier为空时返回该方法")
         imageView.image = image
-        self.dismiss(animated: true, completion: nil)
     }
 
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
